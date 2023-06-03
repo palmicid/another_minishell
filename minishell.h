@@ -6,14 +6,13 @@
 /*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 23:18:15 by pruangde          #+#    #+#             */
-/*   Updated: 2023/05/31 00:09:04 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/06/01 04:03:30 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-// # include "./libft/libft.h"
 # include "./libft/libft.h"
 # include <limits.h>
 # include <sys/signal.h>
@@ -102,8 +101,8 @@ int			cont_char(char *str, int i, char c);
 
 // ------ TEST
 void		test_print(t_cmd *head);
-void		test_printstrcut(t_strcut *fwd);
-void		test_printonestrcut(t_strcut *cur);
+// void		test_printstrcut(t_strcut *fwd);
+// void		test_printonestrcut(t_strcut *cur);
 
 // utils_2
 int			find_pair(char *str, int i);
@@ -137,17 +136,8 @@ void		err_q_nopair(void);
 void		err_redir(void);
 
 // execute
-void		execute(t_cmd *cmdtable);
 
 // built_in
-void		ft_env(t_cmd *cmdtable);
-void		ft_export(t_cmd *cmdtable);
-void		ft_export_noarg(void);
-void		ft_export_witharg(t_cmd *cmdtable);
-char		*get_key(char *s);
-void		replace_env(char *env);
-void		ft_pwd(t_cmd *cmdtable);
+
 
 #endif
-
-// fixing signal and if var ?

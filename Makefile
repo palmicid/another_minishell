@@ -6,18 +6,13 @@
 #    By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/28 17:30:06 by bsirikam          #+#    #+#              #
-#    Updated: 2023/05/30 23:51:02 by pruangde         ###   ########.fr        #
+#    Updated: 2023/06/02 15:39:41 by pruangde         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 UNAME = uname -s
-ARCH = arch
-ifeq ($(UNAME), Linux)
-	CC = clang
-else
-	CC = gcc
-endif
 
+CC = cc
 CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 RM = rm -rf
 NAME = minishell
@@ -25,20 +20,15 @@ NAME = minishell
 LIBFT_PATH = libft
 LIBFT = $(LIBFT_PATH)/libft.a
 
-# ifeq ($(ARCH), arm64)
-# 	LDFLAGS	= -L${HOMEBREW_PREFIX}/opt/readline/lib
-# 	CPPFLAGS	= -I${HOMEBREW_PREFIX}/opt/readline/include
-# else
-# 	LDFLAGS	= -L/usr/local/opt/readline
-# 	CPPFLAGS	= -I/usr/local/opt/readline/include
-# endif
-
+# MAC M2
 LDFLAGS = -L${HOMEBREW_PREFIX}/opt/readline/lib
 CPPFLAGS = -I${HOMEBREW_PREFIX}/opt/readline/include
 
+# School MAC
 # LDFLAGS		= -L/usr/local/opt/readline/
 # CPPFLAGS	= -I/usr/local/opt/readline/include/
 
+# UBUNTU - not work finding new
 # LDFLAGS		= -L/usr/include/readline/
 # CPPFLAGS	= -I/usr/local/opt/readline/include/
 
@@ -46,12 +36,12 @@ CPPFLAGS = -I${HOMEBREW_PREFIX}/opt/readline/include
 
 PARS = parser_1.c parser_2.c parser_3.c parser_4.c parser_5.c parser_6.c
 UTIL = utils_1.c utils_2.c utils_3.c utils_4.c utils_5.c
+BLTIN = 
+EXEC = 
 ERRMSG = err_msg.c
 
-# EXECUTE = execute.c
-# BUILTIN = builtin_export.c builtin_env.c builtin_export_utils.c builtin_pwd.c
 
-SRCS = minishell.c sig_handle.c env.c $(PARS) $(UTIL) $(ERRMSG) #$(EXECUTE) $(BUILTIN)
+SRCS = minishell.c sig_handle.c env.c $(PARS) $(UTIL) $(ERRMSG) $(BLTIN) $(EXEC)
 OBJ_C = $(SRCS:.c=.o)
 OBJ_DIR = obj
 OBJS := $(addprefix $(OBJ_DIR)/, $(OBJ_C))
@@ -87,12 +77,8 @@ re: fclean all
 # test:
 #	$(CC) maintest.c $(NAME)
 #	valgrind --vgdb=no --leak-check=full --show-leak-kinds=all ./a.out
-
-leak:
-	leaks --atExit -- ./push_swap
-
-san:
-	$(CC) -fsanitize=address -fno-omit-frame-pointer maintest.c
+# san:
+# 	$(CC) -fsanitize=address -fno-omit-frame-pointer maintest.c
 
 norm:
 	@echo "------------------------------------"

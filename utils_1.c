@@ -6,7 +6,7 @@
 /*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 00:48:21 by pruangde          #+#    #+#             */
-/*   Updated: 2023/05/31 00:18:38 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/05/31 05:01:55 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,42 +89,42 @@ void	test_print(t_cmd *head)
 		printf("CMD == ");
 		while (ptr->cmd[in] != NULL)
 		{
-			printf(" ==> %s", ptr->cmd[in]);
+			printf("%s ", ptr->cmd[in]);
 			in++;
 		}
-		printf(" <===\n");
+		printf("\n");
 		ptr = ptr->next;
 	}
 }
 
-void	test_printstrcut(t_strcut *fwd)
-{
-	t_strcut	*ptr;
-	ptr = fwd;
-	ft_putstr_fd("\n=======STRCUT_PRINT==========\n", 2);
-	while (ptr)
-	{
-		if (ptr->str)
-			ft_putstr_fd("stat = ", 2);
-			ft_putnbr_fd(ptr->stat, 2);
-			ft_putstr_fd(" | str = [", 2);
-			ft_putstr_fd(ptr->str, 2);
-			ft_putstr_fd("]\n", 2);
-			ptr = ptr->next;
-	}
-	ft_putstr_fd("\n=============================\n", 2);
-}
+// void	test_printstrcut(t_strcut *fwd)
+// {
+// 	t_strcut	*ptr;
+// 	ptr = fwd;
+// 	ft_putstr_fd("\n=======STRCUT_PRINT==========\n", 2);
+// 	while (ptr)
+// 	{
+// 		if (ptr->str)
+// 			ft_putstr_fd("stat = ", 2);
+// 			ft_putnbr_fd(ptr->stat, 2);
+// 			ft_putstr_fd(" | str = [", 2);
+// 			ft_putstr_fd(ptr->str, 2);
+// 			ft_putstr_fd("]\n", 2);
+// 			ptr = ptr->next;
+// 	}
+// 	ft_putstr_fd("\n=============================\n", 2);
+// }
 
-void	test_printonestrcut(t_strcut *cur)
-{
-	if (cur)
-	{
-		ft_putstr_fd("stat = ", 2);
-		ft_putnbr_fd(cur->stat, 2);
-		ft_putstr_fd(" | str = [", 2);
-		ft_putstr_fd(cur->str, 2);
-		ft_putstr_fd("]\n", 2);
-	}
-}
+// void	test_printonestrcut(t_strcut *cur)
+// {
+// 	if (cur)
+// 	{
+// 		ft_putstr_fd("stat = ", 2);
+// 		ft_putnbr_fd(cur->stat, 2);
+// 		ft_putstr_fd(" | str = [", 2);
+// 		ft_putstr_fd(cur->str, 2);
+// 		ft_putstr_fd("]\n", 2);
+// 	}
+// }
 
 // 	-----------TEST-------------
