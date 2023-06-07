@@ -6,7 +6,7 @@
 /*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 23:18:15 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/07 17:29:01 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/07 18:36:27 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # include <termios.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+# include "backend.h"
 
 typedef struct s_data
 {
@@ -41,12 +42,13 @@ typedef struct s_data
 
 extern char		**environ;
 
-typedef struct s_cmd
+/*
+typedef struct s_listcmd
 {
 	char			**cmd;
-	struct s_cmd	*next;
-}					t_cmd;
-
+	struct s_listcmd	*next;
+}					t_listcmd;
+*/
 typedef struct s_c
 {
 	int	st;
@@ -75,7 +77,7 @@ int			init_environ(t_data *data);
 int			end_environ(t_data *data);
 
 // parser_1 - main split + split long list to cmd
-t_cmd		*str_split(char *str, t_data *data);
+t_listcmd		*str_split(char *str, t_data *data);
 
 // parser_2 - quote split and add stat q or nonq
 t_strcut	*qsp_split(char *str);
@@ -100,7 +102,7 @@ t_strcut	*lastlist_strcut(t_strcut *list);
 int			cont_char(char *str, int i, char c);
 
 // ------ TEST
-void		test_print(t_cmd *head);
+void		test_print(t_listcmd *head);
 // void		test_printstrcut(t_strcut *fwd);
 // void		test_printonestrcut(t_strcut *cur);
 
@@ -123,12 +125,12 @@ int			find_q_doll(char *str);
 void		set_error(t_strcut *cur);
 void		remove_q(t_strcut *head);
 int			next_i_qsplit(char *str, int i);
-t_cmd		*free_cmdlist(t_cmd *lstcmd);
+t_listcmd		*free_cmdlist(t_listcmd *lstcmd);
 
 // utils_5
 t_strcut	*inside_cxmetavalid(t_strcut **head, char *str);
 t_strcut	*createnew_strcut(void);
-t_cmd		*createnew_lstcmd(void);
+t_listcmd		*createnew_lstcmd(void);
 t_c			*create_countptr(void);
 // err_msg
 void		err_redirpipe(char *str);
@@ -136,7 +138,6 @@ void		err_q_nopair(void);
 void		err_redir(void);
 
 // execute
-# include "backend.h"
 
 // built_in
 

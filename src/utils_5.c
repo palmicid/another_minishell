@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_5.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
+/*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 17:27:40 by pruangde          #+#    #+#             */
-/*   Updated: 2023/05/30 23:55:58 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/06/07 18:34:34 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ t_strcut	*createnew_strcut(void)
 	return (listnew);
 }
 
-t_cmd	*createnew_lstcmd(void)
+t_listcmd	*createnew_lstcmd(void)
 {
-	t_cmd	*listnew;
+	t_listcmd	*listnew;
 
-	listnew = (t_cmd *)malloc(sizeof(t_cmd));
+	listnew = (t_listcmd *)malloc(sizeof(t_listcmd));
 	if (!listnew)
 		return (NULL);
 	listnew->next = NULL;

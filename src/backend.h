@@ -6,7 +6,7 @@
 /*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 20:56:03 by kkaiyawo          #+#    #+#             */
-/*   Updated: 2023/06/07 17:47:19 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/07 18:35:18 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ typedef struct s_listcmd
 	char				**cmd;
 	struct s_listcmd	*next;
 }	t_listcmd;
-
 typedef struct s_fileset
 {
 	char		*name;

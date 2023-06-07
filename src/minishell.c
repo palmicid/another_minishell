@@ -6,7 +6,7 @@
 /*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 02:18:56 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/07 18:04:14 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/07 18:35:34 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 void	process(char *strcmd, t_data *data)
 {
 	// int		stat;
-	t_cmd	*cmdlist;
+	t_listcmd	*cmdlist;
 
 	cmdlist = NULL;
 	add_history(strcmd);
@@ -38,7 +38,7 @@ int	main(void)
 	signal_handling();
 	while (1)
 	{
-		strcmd = readline("minishell-0.6a$ ");
+		strcmd = readline("minishell-0.7.1a$ ");
 		if (!strcmd)
 			break ;
 		else if (strcmd[0] == '\0')

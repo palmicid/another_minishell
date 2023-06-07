@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_4.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
+/*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 01:50:38 by pruangde          #+#    #+#             */
-/*   Updated: 2023/05/26 20:44:41 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/06/07 18:34:34 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,9 @@ int	next_i_qsplit(char *str, int i)
 	return (i - 1);
 }
 
-t_cmd	*free_cmdlist(t_cmd *lstcmd)
+t_listcmd	*free_cmdlist(t_listcmd *lstcmd)
 {
-	t_cmd	*tofree;
+	t_listcmd	*tofree;
 
 	tofree = lstcmd;
 	while (lstcmd)

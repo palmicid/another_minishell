@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_1.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
+/*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 09:52:30 by pruangde          #+#    #+#             */
-/*   Updated: 2023/05/30 22:44:37 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/06/07 18:34:34 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,10 @@ static char	**cmd_fusion(t_strcut *curlst)
 	return (strarr);
 }
 
-static t_cmd	*fusion_and_sepcmd(t_strcut *liststr)
+static t_listcmd	*fusion_and_sepcmd(t_strcut *liststr)
 {
-	t_cmd		*headcmd;
-	t_cmd		*nowcmd;
+	t_listcmd		*headcmd;
+	t_listcmd		*nowcmd;
 	t_strcut	*curstr;
 
 	curstr = liststr;
@@ -98,10 +98,10 @@ static t_cmd	*fusion_and_sepcmd(t_strcut *liststr)
 }
 
 // find ' ' or " " if cannot find pair set all as a string
-t_cmd	*str_split(char *str, t_data *data)
+t_listcmd	*str_split(char *str, t_data *data)
 {
 	t_strcut	*liststr;
-	t_cmd		*listcmd;
+	t_listcmd		*listcmd;
 
 	liststr = qsp_split(str);
 	if (!liststr)

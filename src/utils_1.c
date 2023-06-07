@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
+/*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 00:48:21 by pruangde          #+#    #+#             */
-/*   Updated: 2023/05/31 05:01:55 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/06/07 18:34:34 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_strcut	*free_strcutlist(t_strcut **list)
 
 	head = list[0];
 	while (head)
-	{	
+	{
 		now = head;
 		head = head->next;
 		if (now->str)
@@ -78,9 +78,9 @@ int	cont_char(char *str, int i, char c)
 }
 
 // 	-----------TEST-------------
-void	test_print(t_cmd *head)
+void	test_print(t_listcmd *head)
 {
-	t_cmd	*ptr = head;
+	t_listcmd	*ptr = head;
 	int		in = 0;
 
 	while (ptr != NULL)
