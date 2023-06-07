@@ -3,99 +3,89 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+         #
+#    By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/05/28 17:30:06 by bsirikam          #+#    #+#              #
-#    Updated: 2023/06/02 15:39:41 by pruangde         ###   ########.fr        #
+#    Created: 2023/06/07 17:03:50 by kkaiyawo          #+#    #+#              #
+#    Updated: 2023/06/07 18:04:51 by kkaiyawo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-UNAME = uname -s
+### EXECUTABLE ###
+NAME			=	minishell
 
-CC = cc
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
-RM = rm -rf
-NAME = minishell
+### DIR ###
+SRC_DIR			=	./src/
+BONUS_DIR		=	./bonus/
+LIB_DIR			=	./lib/
+BUILD_DIR		=	./build/
+READLINE_DIR	=	/usr/local/opt/readline/
 
-LIBFT_PATH = libft
-LIBFT = $(LIBFT_PATH)/libft.a
+### FILES ###
+SRC_FILE		=	minishell.c env.c sig_handle.c\
+					parser_1.c parser_2.c parser_3.c parser_4.c parser_5.c \
+					parser_6.c \
+					utils_1.c utils_2.c utils_3.c utils_4.c utils_5.c \
+					err_msg.c \
+					arr_utils.c file_utils.c parser.c fs_utils.c ps_utils.c\
+					exec_utils.c pseudopipex.c executor.c pseudopipex_cmd.c\
+					executor_utils.c malloc_utils.c
+BONUS_FILE		=	parser_1.c parser_2.c parser_3.c parser_4.c parser_5.c \
+					parser_6.c \
+					utils_1.c utils_2.c utils_3.c utils_4.c utils_5.c \
+					err_msg.c \
+					arr_utils.c file_utils.c parser.c fs_utils.c ps_utils.c\
+					exec_utils.c pseudopipex.c executor.c pseudopipex_cmd.c\
+					executor_utils.c malloc_utils.c
+LIB_FILE		=	libft/libft.a
 
-# MAC M2
-LDFLAGS = -L${HOMEBREW_PREFIX}/opt/readline/lib
-CPPFLAGS = -I${HOMEBREW_PREFIX}/opt/readline/include
+### PATH ###
+SRC				=	${addprefix ${BUILD_DIR},${SRC_FILE}}
+BONUS			=	${addprefix ${BUILD_DIR},${BONUS_FILE}}
+LIB				=	${addprefix ${LIB_DIR},${LIB_FILE}}
 
-# School MAC
-# LDFLAGS		= -L/usr/local/opt/readline/
-# CPPFLAGS	= -I/usr/local/opt/readline/include/
+### OBJECTS ###
+SRC_OBJ			=	${SRC:.c=.o}
+BONUS_OBJ		=	${BONUS:.c=.o}
 
-# UBUNTU - not work finding new
-# LDFLAGS		= -L/usr/include/readline/
-# CPPFLAGS	= -I/usr/local/opt/readline/include/
+### COMPILATION ###
+CC				=	gcc
+CFLAG			=	-g -Wall -Wextra -Werror -fsanitize=address
+RM				=	rm -rf
+RLINCL			=	-I$(READLINE_DIR)include/
+RLLIB			=	-lreadline -L$(READLINE_DIR)lib/
 
+all:			${LIB} ${BUILD_DIR} ${NAME}
 
+${NAME}:		${SRC_OBJ}
+					${CC} ${CFLAG} ${RLLIB} ${SRC_OBJ} ${wildcard ${LIB_DIR}*/*.a} -o ${NAME}
 
-PARS = parser_1.c parser_2.c parser_3.c parser_4.c parser_5.c parser_6.c
-UTIL = utils_1.c utils_2.c utils_3.c utils_4.c utils_5.c
-BLTIN = 
-EXEC = 
-ERRMSG = err_msg.c
+bonus:			${LIB} ${BUILD_DIR} ${BONUS_OBJ}
+					${CC} ${CFLAG} -o ${NAME} ${BONUS_OBJ} ${LIB}
 
+${LIB}:
+					find ${LIB_DIR} -mindepth 1 -maxdepth 1 -exec make bonus -C {} \;
 
-SRCS = minishell.c sig_handle.c env.c $(PARS) $(UTIL) $(ERRMSG) $(BLTIN) $(EXEC)
-OBJ_C = $(SRCS:.c=.o)
-OBJ_DIR = obj
-OBJS := $(addprefix $(OBJ_DIR)/, $(OBJ_C))
+${BUILD_DIR}:
+					mkdir -p ${BUILD_DIR}
 
-$(OBJ_DIR)/%.o: %.c $(HEADER)
-	@mkdir -p $(OBJ_DIR)
-	@$(CC) $(CFLAGS) -c $< ${CPPFLAGS} -o $@
+${BUILD_DIR}%.o:${SRC_DIR}%.c
+					${CC} ${CFLAG} ${RLINCL} ${CPPFLAGS} -c -o $@ $^
 
-.PHONY: all clean fclean re bonus
-
-all: $(NAME)
-
-$(NAME): $(LIBFT) $(OBJS)
-	$(CC) $(CFLAGS) $(LDFLAGS) -lreadline $(LIBFT) $(OBJS) -o $(NAME)
-
-$(LIBFT):
-	make -C $(LIBFT_PATH) all
-
-%.o: %.c
-	$(CC) $(CFLAGS) $(LDFLAGS) -c $< -o $@
+${BUILD_DIR}%.o:${BONUS_DIR}%.c
+					${CC} ${CFLAG} ${RLINCL} ${CPPFLAGS} -c -o $@ $^
 
 clean:
-	@make -C $(LIBFT_PATH) clean
-	@$(RM) $(OBJS) $(BN_OBJS)
-	@rm -rf $(OBJ_DIR)
+					${RM} ${SRC_OBJ} ${BONUS_OBJ}
+					find ${LIB_DIR} -mindepth 1 -maxdepth 1 -exec make clean -C {} \;
 
-fclean: clean
-	@make -C $(LIBFT_PATH) fclean
-	@$(RM) $(NAME)
+fclean:			clean
+					${RM} ${NAME}
+					find ${LIB_DIR} -mindepth 1 -maxdepth 1 -exec make fclean -C {} \;
 
-re: fclean all
+re:				fclean all
 
-# test:
-#	$(CC) maintest.c $(NAME)
-#	valgrind --vgdb=no --leak-check=full --show-leak-kinds=all ./a.out
-# san:
-# 	$(CC) -fsanitize=address -fno-omit-frame-pointer maintest.c
+b:				bonus clean
 
-norm:
-	@echo "------------------------------------"
-	@echo " !!!!!!!!   NORMINETTE   !!!!!!!!"
-	@echo ""
-	@norminette -R CheckForbiddenSourceHeader *.c
-	@echo ""
-	@echo ""
-	@norminette -R CheckDefine *.h
-	@echo ""
-	@echo "------------------------------------"
+m:				all clean
 
-normhead:
-	@echo "------------------------------------"
-	@echo " !!!!!!!!   NORMINETTE   !!!!!!!!"
-	@echo " !!!!!!!   ONLY  HEADER   !!!!!!!!"
-	@echo ""
-	@norminette -R CheckDefine *.h
-	@echo ""
-	@echo "------------------------------------"
+.PHONY:			all clean fclean re bonus

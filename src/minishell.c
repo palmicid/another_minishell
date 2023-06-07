@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
+/*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 02:18:56 by pruangde          #+#    #+#             */
-/*   Updated: 2023/05/31 00:14:31 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/06/07 18:04:14 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	main(void)
 	signal_handling();
 	while (1)
 	{
-		strcmd = readline("MNSh-0.5$ ");
+		strcmd = readline("minishell-0.6a$ ");
 		if (!strcmd)
 			break ;
 		else if (strcmd[0] == '\0')

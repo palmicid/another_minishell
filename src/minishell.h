@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
+/*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 23:18:15 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/01 04:03:30 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/06/07 17:29:01 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "./libft/libft.h"
+# include "../lib/libft/libft.h"
 # include <limits.h>
 # include <sys/signal.h>
 # include <string.h>
@@ -136,6 +136,7 @@ void		err_q_nopair(void);
 void		err_redir(void);
 
 // execute
+# include "backend.h"
 
 // built_in
 
