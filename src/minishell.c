@@ -6,7 +6,7 @@
 /*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 02:18:56 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/07 18:35:34 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/07 18:43:08 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	process(char *strcmd, t_data *data)
 	cmdlist = str_split(strcmd, data);
 	// to execute
 	test_print(cmdlist);
+	data->exit_stat = executor(cmdlist, data->env);
 	// data->exit_stat = to_execute(cmdlist);
 	cmdlist = free_cmdlist(cmdlist);
 }
@@ -38,7 +39,7 @@ int	main(void)
 	signal_handling();
 	while (1)
 	{
-		strcmd = readline("minishell-0.7.1a$ ");
+		strcmd = readline("minishell-0.8a$ ");
 		if (!strcmd)
 			break ;
 		else if (strcmd[0] == '\0')
