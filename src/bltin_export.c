@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   bltin_export.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
+/*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/31 22:20:37 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/02 17:07:28 by pruangde         ###   ########.fr       */
+/*   Created: 2023/05/31 22:20:25 by pruangde          #+#    #+#             */
+/*   Updated: 2023/06/08 14:16:03 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "bltin.h"
 
-void	mini_pwd(void)
+// cx arg[1] find '=' if no stop
+// get name if isalnum(name) not ok --> not a valid identifier
+void	mini_export(t_cmd *cmd)
 {
-	char	*pathstr;
 
-	pathstr = getcwd(NULL, 0);
-	if (!pathstr)
-		exit(errno);
-	ft_putstr_fd(pathstr, 1);
-	free(pathstr);
-	// exit(EXIT_SUCCESS);
 }

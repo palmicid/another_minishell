@@ -6,7 +6,7 @@
 /*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 23:18:15 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/08 08:05:21 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/08 14:12:44 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include "backend.h"
+# include "bltin.h"
 
 typedef struct s_data
 {
