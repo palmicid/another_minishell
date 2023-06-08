@@ -6,7 +6,7 @@
 /*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 22:20:44 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/08 14:12:01 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/08 15:42:59 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ char	**envdup(int i, int it, char **tmp, int lim)
 		if (tmp[it] == NULL)
 			return (err_tmp_free(tmp));
 		i++;
+		it++;
 	}
 	return (tmp);
 }
@@ -42,11 +43,12 @@ void	mini_unset(char *todel)
 		return ;
 	pos = find_pos_env(todel);
 	count = count_element_p2p(environ);
-	tmp = (char **)ft_calloc(count, sizeof(char *));
+	tmp = (char **)malloc(count * sizeof(char *));
 	i = 0;
 	tmp = envdup(i, i, tmp, pos);
 	if (!tmp)
 		return ;
+	i = pos + 1;
 	tmp = envdup(i, i - 1, tmp, count);
 	if (!tmp)
 		return ;
