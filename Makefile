@@ -6,7 +6,7 @@
 #    By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/07 17:03:50 by kkaiyawo          #+#    #+#              #
-#    Updated: 2023/06/08 08:12:57 by kkaiyawo         ###   ########.fr        #
+#    Updated: 2023/06/08 14:28:05 by kkaiyawo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,10 @@ SRC_FILE		=	minishell.c env.c sig_handle.c debugger.c\
 					err_msg.c \
 					arr_utils.c file_utils.c parser.c fs_utils.c ps_utils.c\
 					exec_utils.c pseudopipex.c executor.c pseudopipex_cmd.c\
-					executor_utils.c malloc_utils.c
+					executor_utils.c malloc_utils.c\
+					bltin_cd.c bltin_echo.c bltin_env.c bltin_errmsg.c\
+					bltin_exit.c bltin_export.c bltin_pwd.c bltin_unset.c\
+					bltin_utils_1.c
 BONUS_FILE		=	${SRC_FILE}
 LIB_FILE		=	libft/libft.a
 

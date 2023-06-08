@@ -6,7 +6,7 @@
 /*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 22:19:23 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/08 14:14:06 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/08 14:29:44 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	mini_cd(char **strarr)
 
 	oldpwd = find_pos_env("OLDPWD");
 	pwd = find_pos_env("PWD");
-	if ((pathtest == NULL) || (ft_strncmp(pathtest, "~", 2) == 0))
+	if ((strarr == NULL) || (ft_strncmp(strarr, "~", 2) == 0))
 	{
 		if (chdir(getenv("HOME")) == -1)
 		{
@@ -61,9 +61,9 @@ int	mini_cd(char **strarr)
 			return ;
 		}
 	}
-	else if (chdir(pathtest) == -1)
+	else if (chdir(strarr) == -1)
 	{
-		bltin_err_msg(pathtest);
+		bltin_err_msg(strarr);
 		return ;
 	}
 	set_newpwdenv(oldpwd, pwd);

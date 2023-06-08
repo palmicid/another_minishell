@@ -6,7 +6,7 @@
 /*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 20:56:03 by kkaiyawo          #+#    #+#             */
-/*   Updated: 2023/06/08 13:44:37 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/08 14:31:20 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <errno.h>
 # include <limits.h>
 # include "../lib/libft/libft.h"
+# include "bltin.h"
 
 # define DEBUG 0
 

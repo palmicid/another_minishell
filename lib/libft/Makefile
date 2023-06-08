@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bsirikam <bsirikam@student.42bangkok.com>  +#+  +:+       +#+         #
+#    By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/17 12:37:19 by pruangde          #+#    #+#              #
-#    Updated: 2023/05/07 20:37:59 by bsirikam         ###   ########.fr        #
+#    Updated: 2023/06/08 15:38:15 by kkaiyawo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,13 +48,13 @@ BN_OBJS = $(BN_LIB:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@ar -rcs $@ $^
+	ar -rcs $@ $^
 
 %.o: %.c
-	@$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 bonus: $(OBJS) $(BN_OBJS)
-	@ar -rcs $(NAME) $(OBJS) $(BN_OBJS)
+	ar -rcs $(NAME) $(OBJS) $(BN_OBJS)
 
 clean:
 	$(RM) $(OBJS) $(BN_OBJS)

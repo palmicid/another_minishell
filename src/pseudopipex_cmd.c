@@ -6,7 +6,7 @@
 /*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 10:18:11 by kkaiyawo          #+#    #+#             */
-/*   Updated: 2023/06/08 13:20:56 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/08 14:32:46 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,20 @@
 
 int	cmd_findpath(char **cmd, t_parser *ps)
 {
+	if (ft_strncmp(cmd[0], "echo", 5) == 0)
+		mini_echo(cmd);
+	if (ft_strncmp(cmd[0], "cd", 3) == 0)
+		mini_cd(cmd);
+	if (ft_strncmp(cmd[0], "pwd", 4) == 0)
+		mini_pwd(cmd);
+	if (ft_strncmp(cmd[0], "export", 7) == 0)
+		mini_export(cmd);
+	if (ft_strncmp(cmd[0], "unset", 6) == 0)
+		mini_unset(cmd);
+	if (ft_strncmp(cmd[0], "env", 4) == 0)
+		mini_env(cmd);
+	if (ft_strncmp(cmd[0], "exit", 5) == 0)
+		mini_exit(cmd);
 	if (ft_strchr(cmd[0], '/') == NULL)
 		return (cmdcheck_path(cmd, ps));
 	else
