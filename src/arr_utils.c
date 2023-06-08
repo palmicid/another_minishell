@@ -6,7 +6,7 @@
 /*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 08:39:51 by kkaiyawo          #+#    #+#             */
-/*   Updated: 2023/06/07 17:29:50 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/08 08:24:13 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,15 @@ char	**ft_arrclear(char **arr)
 	int		i;
 
 	i = 0;
-	while (arr[i])
+	if (arr)
 	{
-		if (arr[i])
-			free(arr[i]);
-		i++;
-	}
+		while (arr[i])
+		{
+			if (arr[i])
+				free(arr[i]);
+			i++;
+		}
 	free(arr);
+	}
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 15:27:46 by kkaiyawo          #+#    #+#             */
-/*   Updated: 2023/06/07 17:44:40 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/08 08:39:06 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,22 @@ t_exec	*exec_init(void)
 	return (exec);
 }
 
-t_exec	*exec_free(t_exec *exec)
+void	*exec_free(void *exec)
 {
-	if (!exec)
+	t_exec	*ex;
+
+	ex = (t_exec *) exec;
+	if (ex == NULL)
 		return (NULL);
-	if (exec->pipefd[0] > 2)
-		file_close(&exec->pipefd[0]);
-	if (exec->pipefd[1] > 2)
-		file_close(&exec->pipefd[1]);
-	ft_arrclear(exec->cmdarr);
-	ft_lstclear(&exec->cmdlst, free);
-	ft_lstclear(&exec->infile, fs_free);
-	ft_lstclear(&exec->outfile, fs_free);
-	free(exec);
+	if (ex->pipefd[0] > 2)
+		file_close(&ex->pipefd[0]);
+	if (ex->pipefd[1] > 2)
+		file_close(&ex->pipefd[1]);
+	ft_arrclear(ex->cmdarr);
+	ft_lstclear(&ex->cmdlst, free);
+	ft_lstclear(&ex->infile, fs_free2);
+	ft_lstclear(&ex->outfile, fs_free2);
+	free(ex);
 	return (NULL);
 }
 
@@ -52,7 +55,7 @@ void	exec_free2(void *exec)
 	t_exec	*ex;
 
 	ex = (t_exec *)exec;
-	if (!ex)
+	if (ex == NULL)
 		return ;
 	if (ex->pipefd[0] > 2)
 		file_close(&ex->pipefd[0]);
@@ -60,8 +63,8 @@ void	exec_free2(void *exec)
 		file_close(&ex->pipefd[1]);
 	ft_arrclear(ex->cmdarr);
 	ft_lstclear(&ex->cmdlst, free);
-	ft_lstclear(&ex->infile, fs_free);
-	ft_lstclear(&ex->outfile, fs_free);
+	ft_lstclear(&ex->infile, fs_free2);
+	ft_lstclear(&ex->outfile, fs_free2);
 	free(ex);
 	return ;
 }

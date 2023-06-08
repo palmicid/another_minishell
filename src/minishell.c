@@ -6,7 +6,7 @@
 /*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 02:18:56 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/07 18:43:08 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/08 08:22:16 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,15 @@ int	main(void)
 	char	*strcmd;
 	t_data	*data;
 
+	if (DEBUG == 1)
+		ft_putendl_fd("DEBUG mode ON", 1);
 	strcmd = NULL;
 	data = (t_data *)malloc(sizeof(t_data));
 	init_environ(data);
 	signal_handling();
 	while (1)
 	{
-		strcmd = readline("minishell-0.8a$ ");
+		strcmd = readline("minishell-0.8.0a$ ");
 		if (!strcmd)
 			break ;
 		else if (strcmd[0] == '\0')

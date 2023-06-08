@@ -6,7 +6,7 @@
 /*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 10:05:07 by kkaiyawo          #+#    #+#             */
-/*   Updated: 2023/06/07 17:46:04 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/08 08:45:02 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,15 @@ int	pipex_exec(t_exec *exec, t_parser *ps)
 	int	ignore[2];
 	int	status;
 
+	print_debug(1, "Checking infile...");
 	status = fs_check(exec->infile, &ignore[0]);
 	if (status != 0)
 		return (status); //error
+	print_debug(1, "Checking outfile...");
 	status = fs_check(exec->outfile, &ignore[1]);
 	if (status != 0)
 		return (status); //error
+	print_debug(1, "Checking command...");
 	status = cmd_findpath(exec->cmdarr, ps);
 	if (status != 0)
 		return (status); //error

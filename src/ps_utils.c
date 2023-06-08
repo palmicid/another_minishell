@@ -6,7 +6,7 @@
 /*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 15:03:36 by kkaiyawo          #+#    #+#             */
-/*   Updated: 2023/06/07 17:40:01 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/08 08:38:45 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,29 @@ char	**ps_getpath(char **envp)
 	return (path);
 }
 
-t_parser	*ps_free(t_parser *ps)
+void	*ps_free(void *ps)
 {
-	if (!ps)
+	t_parser *pss;
+
+	pss = (t_parser *) ps;
+	if (!pss)
 		return (NULL);
-	if (ps->exec)
-		ft_lstclear(&ps->exec, exec_free2);
-	ft_arrclear(ps->path);
-	free(ps);
+	if (pss->exec)
+		ft_lstclear(&pss->exec, exec_free2);
+	ft_arrclear(pss->path);
+	free(pss);
 	return (NULL);
+}
+
+void	ps_free2(void *ps)
+{
+	t_parser *pss;
+
+	pss = (t_parser *) ps;
+	if (!pss)
+		return ;
+	if (pss->exec)
+		ft_lstclear(&pss->exec, exec_free2);
+	ft_arrclear(pss->path);
+	free(pss);
 }

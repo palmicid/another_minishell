@@ -6,7 +6,7 @@
 #    By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/07 17:03:50 by kkaiyawo          #+#    #+#              #
-#    Updated: 2023/06/07 18:04:51 by kkaiyawo         ###   ########.fr        #
+#    Updated: 2023/06/08 08:12:57 by kkaiyawo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ BUILD_DIR		=	./build/
 READLINE_DIR	=	/usr/local/opt/readline/
 
 ### FILES ###
-SRC_FILE		=	minishell.c env.c sig_handle.c\
+SRC_FILE		=	minishell.c env.c sig_handle.c debugger.c\
 					parser_1.c parser_2.c parser_3.c parser_4.c parser_5.c \
 					parser_6.c \
 					utils_1.c utils_2.c utils_3.c utils_4.c utils_5.c \
@@ -29,13 +29,7 @@ SRC_FILE		=	minishell.c env.c sig_handle.c\
 					arr_utils.c file_utils.c parser.c fs_utils.c ps_utils.c\
 					exec_utils.c pseudopipex.c executor.c pseudopipex_cmd.c\
 					executor_utils.c malloc_utils.c
-BONUS_FILE		=	parser_1.c parser_2.c parser_3.c parser_4.c parser_5.c \
-					parser_6.c \
-					utils_1.c utils_2.c utils_3.c utils_4.c utils_5.c \
-					err_msg.c \
-					arr_utils.c file_utils.c parser.c fs_utils.c ps_utils.c\
-					exec_utils.c pseudopipex.c executor.c pseudopipex_cmd.c\
-					executor_utils.c malloc_utils.c
+BONUS_FILE		=	${SRC_FILE}
 LIB_FILE		=	libft/libft.a
 
 ### PATH ###
@@ -49,7 +43,7 @@ BONUS_OBJ		=	${BONUS:.c=.o}
 
 ### COMPILATION ###
 CC				=	gcc
-CFLAG			=	-g -Wall -Wextra -Werror -fsanitize=address
+CFLAG			=	-g -Wall -Wextra -Werror
 RM				=	rm -rf
 RLINCL			=	-I$(READLINE_DIR)include/
 RLLIB			=	-lreadline -L$(READLINE_DIR)lib/

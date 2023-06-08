@@ -6,7 +6,7 @@
 /*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 20:56:03 by kkaiyawo          #+#    #+#             */
-/*   Updated: 2023/06/07 18:35:18 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/08 08:35:25 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 # include <errno.h>
 # include <limits.h>
 # include "../lib/libft/libft.h"
+
+# define DEBUG 1
 
 typedef enum e_filetype
 {
@@ -79,6 +81,9 @@ typedef struct s_parser
 	int		status;
 }	t_parser;
 
+// debugger.c
+void		print_debug(int argc, ...);
+
 // parser_utils.c
 /* ****************************************************************************
 initializes the t_parser struct
@@ -91,7 +96,8 @@ char		**ps_getpath(char **envp);
 /* ****************************************************************************
 free t_exec struct
 **************************************************************************** */
-t_parser	*ps_free(t_parser *ps);
+void	*ps_free(void *ps);
+void	ps_free2(void *ps);
 
 // exec_utils.c
 /* ****************************************************************************
@@ -101,7 +107,7 @@ t_exec		*exec_init(void);
 /* ****************************************************************************
 free t_parser struct
 **************************************************************************** */
-t_exec		*exec_free(t_exec *exec);
+void		*exec_free(void *exec);
 void		exec_free2(void *exec);
 
 // fs_utils.c
@@ -112,7 +118,8 @@ t_fileset	*fs_init(char *name, int fd, t_filetype type);
 /* ****************************************************************************
 free t_fileset struct
 **************************************************************************** */
-void		fs_free(void *ptr);
+void		*fs_free(void *ptr);
+void		fs_free2(void *ptr);
 /* ****************************************************************************
 check access for all t_fileset in the list
 - return 0 if all access is ok, otherwise return errno

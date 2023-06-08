@@ -6,7 +6,7 @@
 /*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 08:36:36 by kkaiyawo          #+#    #+#             */
-/*   Updated: 2023/06/07 17:44:13 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/08 08:41:02 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,31 @@ t_fileset	*fs_init(char *name, int fd, t_filetype type)
 	return (fs);
 }
 
-void	fs_free(void *ptr)
+void	*fs_free(void *ptr)
 {
 	t_fileset	*fs;
 
 	fs = (t_fileset *) ptr;
-	if (!fs)
+	if (fs == NULL)
+		return (NULL);
+	if (fs->fd > 2)
+		file_close(&fs->fd);
+	if (fs->name != NULL)
+		free(fs->name);
+	free(fs);
+	return (NULL);
+}
+
+void	fs_free2(void *ptr)
+{
+	t_fileset	*fs;
+
+	fs = (t_fileset *) ptr;
+	if (fs == NULL)
 		return ;
 	if (fs->fd > 2)
 		file_close(&fs->fd);
-	if (fs->name)
+	if (fs->name != NULL)
 		free(fs->name);
 	free(fs);
 }
@@ -54,7 +69,8 @@ int	fs_check(t_list *fslst, int *fd)
 	ptr = fslst;
 	while (ptr)
 	{
-		fs = ptr->content;
+		fs = (t_fileset *) ptr->content;
+		print_debug(2, "opening: ", fs->name);
 		if (fs->type == INFILE || fs->type == OUTFILE || fs->type == HEREDOC)
 			status = file_open(fs);
 		else if (fs->type == HEREDOC)
@@ -63,8 +79,7 @@ int	fs_check(t_list *fslst, int *fd)
 			return (status); // error
 		if (ptr->next != NULL && fs->fd > 2)
 			file_close(&fs->fd);
-		else
-			*fd = fs->fd;
+		*fd = fs->fd;
 		ptr = ptr->next;
 	}
 	return (status);
