@@ -6,7 +6,7 @@
 /*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 08:36:36 by kkaiyawo          #+#    #+#             */
-/*   Updated: 2023/06/08 12:40:52 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/08 13:40:30 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	fs_free2(void *ptr)
 	free(fs);
 }
 
-int	fs_check(t_list *fslst, int *fd)
+int	fs_check(t_list *fslst, int *fd, t_parser *ps)
 {
 	t_fileset	*fs;
 	t_list		*ptr;
@@ -71,9 +71,9 @@ int	fs_check(t_list *fslst, int *fd)
 	{
 		fs = (t_fileset *) ptr->content;
 		if (fs->type == INFILE || fs->type == OUTFILE || fs->type == APPEND)
-			status = file_open(fs);
+			status = file_open(fs, ps);
 		else if (fs->type == HEREDOC)
-			status = heredoc_open(fs);
+			status = heredoc_open(fs, ps);
 		if (status != 0)
 			return (status); // error
 		*fd = fs->fd;

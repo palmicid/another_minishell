@@ -6,7 +6,7 @@
 /*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 10:18:11 by kkaiyawo          #+#    #+#             */
-/*   Updated: 2023/06/07 17:49:35 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/08 13:20:56 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,15 @@ int	cmdcheck_path(char **cmd, t_parser *ps)
 		if (access(newpath, F_OK) == 0)
 		{
 			if (access(newpath, X_OK) != 0)
-				return (126); //Permission denied
+				executor_error(ps, cmd[0], ACCESS_ERROR, 126);
 			cmd[0] = ft_free(cmd[0]);
 			cmd[0] = newpath;
 			return (0);
 		}
 		newpath = ft_free(newpath);
 	}
-	if (newpath == NULL)
-		return (127); //command not found
-	else
-		return (127);
+	executor_error(ps, cmd[0], CMD_ERROR, 127);
+	return(127);
 }
 
 char	*ft_strprepend(char *s1, char *s2)
@@ -69,10 +67,16 @@ int	cmdcheck_notpath(char **cmd, t_parser *ps)
 	if (access(cmd[0], F_OK) == 0)
 	{
 		if (access(cmd[0], X_OK) != 0)
+		{
+			executor_error(ps, cmd[0], ACCESS_ERROR, 126);
 			return (126); //Permission denied
+		}
 		else
 			return (0);
 	}
 	else
+	{
+		executor_error(ps, cmd[0], FILE_ERROR, 127);
 		return (127); //No such file or directory
+	}
 }

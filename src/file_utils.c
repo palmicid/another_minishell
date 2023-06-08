@@ -6,18 +6,18 @@
 /*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 11:50:14 by kkaiyawo          #+#    #+#             */
-/*   Updated: 2023/06/08 09:52:38 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/08 13:46:13 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "backend.h"
 
-int	file_open(t_fileset *fs)
+int	file_open(t_fileset *fs, t_parser *ps)
 {
 	if (access(fs->name, F_OK) != 0)
 	{
 		if (fs->type == INFILE)
-			return (1); //Error
+			executor_error(ps, fs->name, FILE_ERROR, errno); //1
 		else if (fs->type == OUTFILE || fs->type == APPEND)
 			fs->fd = open(fs->name, O_CREAT | O_WRONLY, 0644);
 		file_close(&fs->fd);
@@ -25,14 +25,14 @@ int	file_open(t_fileset *fs)
 	if (fs->type == INFILE)
 	{
 		if (access(fs->name, R_OK) != 0)
-			return (1); //Error
+			executor_error(ps, fs->name, ACCESS_ERROR, errno); //1
 		fs->fd = open(fs->name, O_RDONLY);
 			print_debug(4, "opened ", fs->name, " (read) at fd ", ft_itoa(fs->fd));
 	}
 	else if (fs->type == OUTFILE || fs->type == APPEND)
 	{
 		if (access(fs->name, W_OK) != 0)
-			return (1); //Error
+			executor_error(ps, fs->name, ACCESS_ERROR, errno); //1
 		if (fs->type == APPEND)
 		{
 			fs->fd = open(fs->name, O_WRONLY | O_APPEND);
@@ -47,10 +47,11 @@ int	file_open(t_fileset *fs)
 	return (0);
 }
 
-int	heredoc_open(t_fileset *fs)
+int	heredoc_open(t_fileset *fs, t_parser *ps)
 {
 	char	*line;
 
+	(void) ps;
 	ft_strlcat(fs->name, "\n", ft_strlen(fs->name) + 2);
 	fs->fd = open("/tmp/heredoc", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	line = NULL;

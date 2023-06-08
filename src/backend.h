@@ -6,7 +6,7 @@
 /*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 20:56:03 by kkaiyawo          #+#    #+#             */
-/*   Updated: 2023/06/08 12:50:18 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/08 13:44:37 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include <limits.h>
 # include "../lib/libft/libft.h"
 
-# define DEBUG 1
+# define DEBUG 0
 
 typedef enum e_filetype
 {
@@ -125,7 +125,7 @@ check access for all t_fileset in the list
 - return 0 if all access is ok, otherwise return errno
 - set fd to the file descriptor of the last t_fileset in the list
 **************************************************************************** */
-int			fs_check(t_list *fslst, int *fd);
+int			fs_check(t_list *fslst, int *fd, t_parser *ps);
 /* ****************************************************************************
 close all non-pipe non-std fd in the list that is not intended to leave open
 **************************************************************************** */
@@ -135,11 +135,11 @@ void		fs_close(t_list *fslst, int ignore[2]);
 /* ****************************************************************************
 check file access, open it and set fd to the file descriptor
 **************************************************************************** */
-int			file_open(t_fileset *fs);
+int			file_open(t_fileset *fs, t_parser *ps);
 /* ****************************************************************************
 create a heredoc file and set fd to the file descriptor
 **************************************************************************** */
-int			heredoc_open(t_fileset *fs);
+int			heredoc_open(t_fileset *fs, t_parser *ps);
 /* ****************************************************************************
 close fd and set to INT_MIN
 **************************************************************************** */
