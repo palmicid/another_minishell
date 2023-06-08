@@ -6,7 +6,7 @@
 /*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 11:50:14 by kkaiyawo          #+#    #+#             */
-/*   Updated: 2023/06/08 09:11:05 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/08 09:52:38 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ int	file_open(t_fileset *fs)
 	{
 		if (access(fs->name, R_OK) != 0)
 			return (1); //Error
-		fs->fd = open(fs->name, O_RDONLY | O_TRUNC);
+		fs->fd = open(fs->name, O_RDONLY);
+			print_debug(4, "opened ", fs->name, " (read) at fd ", ft_itoa(fs->fd));
 	}
 	else if (fs->type == OUTFILE || fs->type == APPEND)
 	{
@@ -67,7 +68,7 @@ int	heredoc_open(t_fileset *fs)
 		free(line);
 	file_close(&fs->fd);
 	fs->fd = open("/tmp/heredoc", O_RDONLY);
-	return (fs->fd);
+	return (0);
 }
 
 void	file_close(int *fd)
