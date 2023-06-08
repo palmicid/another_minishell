@@ -6,7 +6,7 @@
 /*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 08:36:36 by kkaiyawo          #+#    #+#             */
-/*   Updated: 2023/06/08 09:12:03 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/08 12:40:52 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,16 +70,16 @@ int	fs_check(t_list *fslst, int *fd)
 	while (ptr)
 	{
 		fs = (t_fileset *) ptr->content;
-		print_debug(4, "opening: ", fs->name, ", type: ", ft_itoa(fs->type));
 		if (fs->type == INFILE || fs->type == OUTFILE || fs->type == APPEND)
 			status = file_open(fs);
 		else if (fs->type == HEREDOC)
 			status = heredoc_open(fs);
 		if (status != 0)
 			return (status); // error
+		*fd = fs->fd;
+		print_debug(6, "opening: ", fs->name, ", type: ", ft_itoa(fs->type), " at fd", ft_itoa(fs->fd));
 		if (ptr->next != NULL && fs->fd > 2)
 			file_close(&fs->fd);
-		*fd = fs->fd;
 		ptr = ptr->next;
 	}
 	return (status);

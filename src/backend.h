@@ -6,7 +6,7 @@
 /*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 20:56:03 by kkaiyawo          #+#    #+#             */
-/*   Updated: 2023/06/08 08:35:25 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/08 12:50:18 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,6 +174,10 @@ t_exec		*parse2exec(t_listcmd *lc);
 parses the command line arguments to t_fileset
 **************************************************************************** */
 void		parse2fs(char **str, int i, t_exec *exec);
+/* ****************************************************************************
+redirect to pipe for all processes
+**************************************************************************** */
+void		parser_addpipe(t_list *ptr, t_parser *ps);
 
 // executor.c
 /* ****************************************************************************
@@ -204,11 +208,11 @@ int			pipex_exec(t_exec *exec, t_parser *ps);
 /* ****************************************************************************
 redirect fd to stdin and stdout
 **************************************************************************** */
-void		dup_close(int fd[2]);
+void		dup_close(int *fd);
 /* ****************************************************************************
 close all the unnecessary fd, leaving ignore'th pipe fd open
 **************************************************************************** */
-void		pipex_close(t_parser *ps);
+void		pipex_close(t_parser *ps, int ig0, int ig1);
 
 // pseudopipex_cmd.c
 /* ****************************************************************************
