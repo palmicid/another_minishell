@@ -6,7 +6,7 @@
 /*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 22:19:23 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/08 14:29:44 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/09 11:26:42 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,14 @@ int	mini_cd(char **strarr)
 		if (chdir(getenv("HOME")) == -1)
 		{
 			bltin_err_msg(getenv("HOME"));
-			return ;
+			return (1);
 		}
 	}
 	else if (chdir(strarr) == -1)
 	{
 		bltin_err_msg(strarr);
-		return ;
+		return (1);
 	}
 	set_newpwdenv(oldpwd, pwd);
-	return ;
+	return (0);
 }

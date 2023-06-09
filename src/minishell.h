@@ -6,7 +6,7 @@
 /*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 23:18:15 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/09 11:23:21 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/09 11:24:48 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -346,16 +346,18 @@ int			cmdcheck_path(char **cmd, t_parser *ps);
 int			cmdcheck_notpath(char **cmd, t_parser *ps);
 
 // built_in
-int			find_pos_env(char *strarr);
-void		bltin_err_msg(char *str);
+int		mini_echo(char **strarr);
+int		mini_cd(char **strarr);
+int		mini_pwd(char **strarr);
+int		mini_export(char **strarr);
+int		mini_unset(char **strarr);
+int		mini_env(char **strarr);
+int		mini_exit(char **strarr);
 
-int			mini_echo(char **strarr);
-int			mini_cd(char **strarr);
-int			mini_pwd(char **strarr);
-int			mini_export(char **strarr);
-int			mini_unset(char **strarr);
-int			mini_env(char **strarr);
-int			mini_exit(char **strarr);
-
+int		find_pos_env(char *tofind);
+char	*getvarname(char *str);
+char	**sp_splitndup(char **dst, char **src, int n);
+int		cx_validvar(char *name);
+int		free_reterr_export(char **ptr);
 
 #endif

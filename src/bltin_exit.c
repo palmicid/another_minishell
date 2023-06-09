@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bltin_exit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
+/*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 22:20:13 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/09 10:54:59 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/06/09 11:28:59 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	minus_val(int num)
 	{
 		num += 256;
 	}
-	return (num - 256);
+	return (num % 256);
 }
 
 int	mini_exit(char **strarr)
