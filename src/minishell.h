@@ -6,7 +6,7 @@
 /*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 23:18:15 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/09 08:58:23 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/09 11:23:21 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,7 +183,7 @@ int			find_q_doll(char *str);
 void		set_error(t_strcut *cur);
 void		remove_q(t_strcut *head);
 int			next_i_qsplit(char *str, int i);
-t_listcmd		*free_cmdlist(t_listcmd *lstcmd);
+t_listcmd	*free_cmdlist(t_listcmd *lstcmd);
 
 // utils_5
 t_strcut	*inside_cxmetavalid(t_strcut **head, char *str);

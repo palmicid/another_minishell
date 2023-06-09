@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   bltin_pwd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 22:20:37 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/08 14:16:20 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/09 10:58:23 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bltin.h"
-#include "minishell.h"
 
 int	mini_pwd(char **strarr)
 {
@@ -22,5 +21,5 @@ int	mini_pwd(char **strarr)
 		exit(errno);
 	ft_putstr_fd(pathstr, 1);
 	free(pathstr);
-	// exit(EXIT_SUCCESS);
+	exit(EXIT_SUCCESS);
 }
