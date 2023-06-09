@@ -6,7 +6,7 @@
 #    By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/07 17:03:50 by kkaiyawo          #+#    #+#              #
-#    Updated: 2023/06/08 14:28:05 by kkaiyawo         ###   ########.fr        #
+#    Updated: 2023/06/08 16:06:43 by kkaiyawo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,7 @@ bonus:			${LIB} ${BUILD_DIR} ${BONUS_OBJ}
 					${CC} ${CFLAG} -o ${NAME} ${BONUS_OBJ} ${LIB}
 
 ${LIB}:
-					find ${LIB_DIR} -mindepth 1 -maxdepth 1 -exec make bonus -C {} \;
+					find ${LIB_DIR} -mindepth 1 -maxdepth 1 -exec make -C {} \;
 
 ${BUILD_DIR}:
 					mkdir -p ${BUILD_DIR}

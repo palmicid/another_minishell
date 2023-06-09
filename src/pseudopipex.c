@@ -6,7 +6,7 @@
 /*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 10:05:07 by kkaiyawo          #+#    #+#             */
-/*   Updated: 2023/06/08 13:40:52 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/09 08:59:24 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@ int	pipex_exec(t_exec *exec, t_parser *ps)
 		return (status); //error
 	pipex_close(ps, ignore[0], ignore[1]);
 	dup_close(ignore);
+	status = execve_builtin(exec, ps);
+	if (status >= 0)
+		return (status);
 	execve(exec->cmdarr[0], exec->cmdarr, ps->envp);
 	return (0);
 }
@@ -70,4 +73,28 @@ void	dup_close(int *fd)
 	}
 }
 
-int			pipex_error(t_parser *ps, char *msg, t_error err, int errnum);
+void	execve_builtin(t_exec *exec, t_parser *ps)
+{
+	int	status;
+
+	status = INT_MIN;
+	if (ft_strncmp(exec->cmdarr[0], "exit", 5) == 0)
+		status = mini_exit(exec->cmdarr);
+	if (ft_strncmp(exec->cmdarr[0], "echo", 5) == 0)
+		status = mini_echo(exec->cmdarr);
+	if (ft_strncmp(exec->cmdarr[0], "cd", 3) == 0)
+		status = mini_cd(exec->cmdarr);
+	if (ft_strncmp(exec->cmdarr[0], "pwd", 4) == 0)
+		status = mini_pwd(exec->cmdarr);
+	if (ft_strncmp(exec->cmdarr[0], "export", 7) == 0)
+		status = mini_export(exec->cmdarr);
+	if (ft_strncmp(exec->cmdarr[0], "unset", 6) == 0)
+		status = mini_unset(exec->cmdarr);
+	if (ft_strncmp(exec->cmdarr[0], "env", 4) == 0)
+		status = mini_env(exec->cmdarr);
+	if (status > 0)
+	{
+		ps = ps_free(ps);
+		return (status);
+	}
+}

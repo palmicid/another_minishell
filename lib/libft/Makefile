@@ -6,7 +6,7 @@
 #    By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/17 12:37:19 by pruangde          #+#    #+#              #
-#    Updated: 2023/06/08 15:38:15 by kkaiyawo         ###   ########.fr        #
+#    Updated: 2023/06/08 16:06:34 by kkaiyawo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,10 +38,8 @@ BN_LIB = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.
 
 GNL = get_next_line.c get_next_line_utils.c
 
-SRCS = $(IS_LIB) $(TO_LIB) $(MEM_LIB) $(STR_LIB) $(P2_LIB) $(P2FD_LIB) $(GNL)
+SRCS = $(IS_LIB) $(TO_LIB) $(MEM_LIB) $(STR_LIB) $(P2_LIB) $(P2FD_LIB) $(GNL) $(BN_LIB)
 OBJS = $(SRCS:.c=.o)
-
-BN_OBJS = $(BN_LIB:.c=.o)
 
 .PHONY: all clean fclean re bonus
 
@@ -53,11 +51,8 @@ $(NAME): $(OBJS)
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-bonus: $(OBJS) $(BN_OBJS)
-	ar -rcs $(NAME) $(OBJS) $(BN_OBJS)
-
 clean:
-	$(RM) $(OBJS) $(BN_OBJS)
+	$(RM) $(OBJS)
 
 fclean: clean
 	$(RM) $(NAME)
