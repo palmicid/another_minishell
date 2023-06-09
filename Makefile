@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+         #
+#    By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/07 17:03:50 by kkaiyawo          #+#    #+#              #
-#    Updated: 2023/06/08 14:28:05 by kkaiyawo         ###   ########.fr        #
+#    Updated: 2023/06/09 10:00:28 by pruangde         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 

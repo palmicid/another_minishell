@@ -6,14 +6,14 @@
 /*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 04:15:44 by pruangde          #+#    #+#             */
-/*   Updated: 2023/05/30 23:56:22 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/06/09 09:54:55 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 // if i++ == nothing malloc 
-static char	*getvarname(char *str, t_c *c)
+static char	*getvarname_qm(char *str, t_c *c)
 {
 	char	*name;
 	int		st;
@@ -44,7 +44,7 @@ static char	*sub_expand_proc(char *str, t_c *c, char *fin, t_data *data)
 	char	*varfree;
 
 	varfree = NULL;
-	name = getvarname(str, c);
+	name = getvarname_qm(str, c);
 	if (!name)
 		return (NULL);
 	var = getenv(name);

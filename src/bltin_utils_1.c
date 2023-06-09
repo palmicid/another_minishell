@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bltin_utils_1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 10:46:32 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/08 14:12:08 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/09 10:00:20 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,55 @@ int	find_pos_env(char *tofind)
 	}
 	free(tf);
 	return (-1);
+}
+
+char	*getvarname(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] && (str[i] != '='))
+		i++;
+	return (ft_strndup(str, i));
+}
+
+char	**sp_splitndup(char **dst, char **src, int n)
+{
+	int	i;
+
+	i = 0;
+	while (i < n)
+	{
+		dst[i] = ft_strdup(src[i]);
+		if (!dst[i])
+		{
+			ft_free_p2p_char(dst);
+			return (NULL);
+		}
+		i++;
+	}
+	return (dst);
+}
+
+int	cx_validvar(char *name)
+{
+	if (ft_isalpha(name[0]) || (name[0] == '_'))
+		return (0);
+	else
+		return (1);
+	return (1);
+}
+
+int	free_reterr_export(char **ptr)
+{
+	if (cx_validvar(ptr[0]))
+	{
+		ft_putstr_fd("Minishell: ", 2);
+		ft_putstr_fd(ptr[0], 2);
+		ft_putstr_fd(": ", 2);
+		ft_putendl_fd("not a valid identifier", 2);
+	}
+	free(ptr[0]);
+	ptr = NULL;
+	return (1);
 }
