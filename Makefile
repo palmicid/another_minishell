@@ -6,7 +6,7 @@
 #    By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/07 17:03:50 by kkaiyawo          #+#    #+#              #
-#    Updated: 2023/06/09 11:23:15 by kkaiyawo         ###   ########.fr        #
+#    Updated: 2023/06/09 11:56:40 by kkaiyawo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ BONUS_OBJ		=	${BONUS:.c=.o}
 
 ### COMPILATION ###
 CC				=	gcc
-CFLAG			=	-g -Wall -Wextra -Werror
+CFLAG			=	-g -Wall -Wextra -Werror -fsanitize=address
 RM				=	rm -rf
 RLINCL			=	-I$(READLINE_DIR)include/
 RLLIB			=	-lreadline -L$(READLINE_DIR)lib/

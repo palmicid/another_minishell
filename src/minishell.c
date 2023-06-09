@@ -3,23 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
+/*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 02:18:56 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/09 11:54:01 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/06/09 12:07:05 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	soloexit(char *strcmd, t_data *data)
+void	soloexit(t_listcmd *cmdlist, t_data *data)
 {
-	int status;
-
-	status = mini_exit(&strcmd);
-	free(strcmd);
-	end_environ(data);
-	exit(status);
+	data->exit_stat = mini_exit(cmdlist->cmd);
+	ft_putendl_fd("exit", 1);
 }
 
 int	ismulticmd(char *strcmd)
@@ -30,15 +26,16 @@ int	ismulticmd(char *strcmd)
 	while (strcmd[i])
 	{
 		if (strcmd[i] == '|')
-			return (0);
+			return (1);
 		if (strcmd[i] == 34 || strcmd[i] == 39)
 			i = find_pair(strcmd, i);
 		i++;
 	}
+	return (0);
 }
 
 // the child going to be parent for all program
-void	process(char *strcmd, t_data *data)
+int	process(char *strcmd, t_data *data)
 {
 	// int		stat;
 	t_listcmd	*cmdlist;
@@ -48,15 +45,23 @@ void	process(char *strcmd, t_data *data)
 	cmdlist = str_split(strcmd, data);
 	// to execute
 	test_print(cmdlist);
-	data->exit_stat = executor(cmdlist, data->env) % 255;
+	if (cmdlist->next != NULL && ft_strchr(cmdlist->next->cmd, '|') != NULL)
+	{
+		soloexit(cmdlist, data);
+		return (1);
+	}
+	else
+		data->exit_stat = executor(cmdlist, data->env) % 255;
 	// data->exit_stat = to_execute(cmdlist);
 	cmdlist = free_cmdlist(cmdlist);
+	return (0);
 }
 
 int	main(void)
 {
 	char	*strcmd;
 	t_data	data;
+	int		x;
 
 	if (DEBUG == 1)
 		ft_putendl_fd("DEBUG mode ON", 1);
@@ -70,11 +75,10 @@ int	main(void)
 			break ;
 		else if (strcmd[0] == '\0')
 			;
-		else if (ft_strncmp(strcmd, "exit", 5) == 0
-		&& ismulticmd(strcmd) == NULL)
-			soloexit(strcmd, &data);
 		else if (ft_strlen(strcmd) > 0)
-			process(strcmd, &data);
+			x = process(strcmd, &data);
+		if (x == 1)
+			exit_end(&data, strcmd);
 		free(strcmd);
 	}
 	ft_putendl_fd("exit", 1);

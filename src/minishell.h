@@ -6,7 +6,7 @@
 /*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 23:18:15 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/09 11:43:12 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/09 12:00:52 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ typedef struct s_parser
 }	t_parser;
 
 // minishell
-void		process(char *strcmd, t_data *data);
+int			process(char *strcmd, t_data *data);
 void		soloexit(char *strcmd, t_data *data);
 
 // sig_handle
