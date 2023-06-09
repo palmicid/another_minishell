@@ -6,7 +6,7 @@
 /*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 23:18:15 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/09 11:24:48 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/09 11:31:41 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -331,7 +331,7 @@ void		pipex_close(t_parser *ps, int ig0, int ig1);
 /* ****************************************************************************
 execute builtin commands and exit
 **************************************************************************** */
-void		execve_builtin(t_exec *exec, t_parser *ps)
+void		execve_builtin(t_exec *exec, t_parser *ps);
 
 // pseudopipex_cmd.c
 /* ****************************************************************************

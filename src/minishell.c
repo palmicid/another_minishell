@@ -6,7 +6,7 @@
 /*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 02:18:56 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/09 11:30:09 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/09 11:32:28 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,21 +46,21 @@ int	main(void)
 		else if (strcmd[0] == '\0')
 			;
 		else if (ft_strncmp(strcmd, "exit", 5) == 0
-		&& ft_strchr(strcmd, '|') == NULL))
+		&& ft_strchr(strcmd, '|') == NULL)
 			soloexit(strcmd, &data);
 		else if (ft_strlen(strcmd) > 0)
-			process(strcmd, data);
+			process(strcmd, &data);
 		free(strcmd);
 	}
 	ft_putendl_fd("exit", 1);
-	exit(end_environ(data));
+	exit(end_environ(&data));
 }
 
 void	soloexit(char *strcmd, t_data *data)
 {
 	int status;
 
-	status = mini_exit(strcmd);
+	status = mini_exit(&strcmd);
 	free(strcmd);
 	end_environ(data);
 	exit(status);
