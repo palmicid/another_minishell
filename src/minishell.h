@@ -6,7 +6,7 @@
 /*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 23:18:15 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/09 11:31:41 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/09 11:43:12 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -331,7 +331,7 @@ void		pipex_close(t_parser *ps, int ig0, int ig1);
 /* ****************************************************************************
 execute builtin commands and exit
 **************************************************************************** */
-void		execve_builtin(t_exec *exec, t_parser *ps);
+int			execve_builtin(t_exec *exec, t_parser *ps, int *stat);
 
 // pseudopipex_cmd.c
 /* ****************************************************************************
@@ -346,18 +346,20 @@ int			cmdcheck_path(char **cmd, t_parser *ps);
 int			cmdcheck_notpath(char **cmd, t_parser *ps);
 
 // built_in
-int		mini_echo(char **strarr);
-int		mini_cd(char **strarr);
-int		mini_pwd(char **strarr);
-int		mini_export(char **strarr);
-int		mini_unset(char **strarr);
-int		mini_env(char **strarr);
-int		mini_exit(char **strarr);
+int			mini_echo(char **strarr);
+int			mini_cd(char **strarr);
+int			mini_pwd(char **strarr);
+int			mini_export(char **strarr);
+int			mini_unset(char **strarr);
+int			mini_env(char **strarr);
+int			mini_exit(char **strarr);
 
-int		find_pos_env(char *tofind);
-char	*getvarname(char *str);
-char	**sp_splitndup(char **dst, char **src, int n);
-int		cx_validvar(char *name);
-int		free_reterr_export(char **ptr);
+int			find_pos_env(char *tofind);
+char		*getvarname(char *str);
+char		**sp_splitndup(char **dst, char **src, int n);
+int			cx_validvar(char *name);
+int			free_reterr_export(char **ptr);
+void		bltin_err_msg(char *str);
+void		bltin_exiterr_msg(char *str);
 
 #endif

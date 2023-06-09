@@ -6,7 +6,7 @@
 /*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 10:05:07 by kkaiyawo          #+#    #+#             */
-/*   Updated: 2023/06/09 08:59:24 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/09 11:36:12 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	pipex_exec(t_exec *exec, t_parser *ps)
 {
 	int	ignore[2];
 	int	status;
+	int	stat;
 
 	ignore[0] = 0;
 	ignore[1] = 1;
@@ -33,9 +34,9 @@ int	pipex_exec(t_exec *exec, t_parser *ps)
 		return (status); //error
 	pipex_close(ps, ignore[0], ignore[1]);
 	dup_close(ignore);
-	status = execve_builtin(exec, ps);
-	if (status >= 0)
-		return (status);
+	status = execve_builtin(exec, ps, &stat);
+	if (status > 0)
+		return (stat);
 	execve(exec->cmdarr[0], exec->cmdarr, ps->envp);
 	return (0);
 }
@@ -73,28 +74,28 @@ void	dup_close(int *fd)
 	}
 }
 
-void	execve_builtin(t_exec *exec, t_parser *ps)
+int	execve_builtin(t_exec *exec, t_parser *ps, int *stat)
 {
-	int	status;
-
-	status = INT_MIN;
+	*stat = INT_MIN;
 	if (ft_strncmp(exec->cmdarr[0], "exit", 5) == 0)
-		status = mini_exit(exec->cmdarr);
+		*stat = mini_exit(exec->cmdarr);
 	if (ft_strncmp(exec->cmdarr[0], "echo", 5) == 0)
-		status = mini_echo(exec->cmdarr);
+		*stat = mini_echo(exec->cmdarr);
 	if (ft_strncmp(exec->cmdarr[0], "cd", 3) == 0)
-		status = mini_cd(exec->cmdarr);
+		*stat = mini_cd(exec->cmdarr);
 	if (ft_strncmp(exec->cmdarr[0], "pwd", 4) == 0)
-		status = mini_pwd(exec->cmdarr);
+		*stat = mini_pwd(exec->cmdarr);
 	if (ft_strncmp(exec->cmdarr[0], "export", 7) == 0)
-		status = mini_export(exec->cmdarr);
+		*stat = mini_export(exec->cmdarr);
 	if (ft_strncmp(exec->cmdarr[0], "unset", 6) == 0)
-		status = mini_unset(exec->cmdarr);
+		*stat = mini_unset(exec->cmdarr);
 	if (ft_strncmp(exec->cmdarr[0], "env", 4) == 0)
-		status = mini_env(exec->cmdarr);
-	if (status > 0)
+		*stat = mini_env(exec->cmdarr);
+	if (*stat >= 0)
 	{
 		ps = ps_free(ps);
-		return (status);
+		return (1);
 	}
+	else
+		return (0);
 }

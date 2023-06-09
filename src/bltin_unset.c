@@ -6,7 +6,7 @@
 /*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 22:20:44 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/09 11:29:38 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/09 11:49:45 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	**envdup(int i, int it, char **tmp, int lim)
 	return (tmp);
 }
 
-void	mini_unset(char *todel)
+int	micro_unset(char *todel)
 {
 	int		i;
 	int		pos;
@@ -51,9 +51,24 @@ void	mini_unset(char *todel)
 	i = pos + 1;
 	tmp = envdup(i, i - 1, tmp, count);
 	if (!tmp)
-		return ;
+		return (1);
 	environ = err_tmp_free(environ);
 	environ = tmp;
 	tmp = NULL;
+	return (0);
+}
+
+int	mini_unset(char **strarr)
+{
+	int	i;
+	int status;
+
+	if (strarr[1] == NULL)
+		return (0);
+	i = 0;
+	while (strarr[++i])
+	{
+		status = micro_unset(strarr[i]);
+	}
 	return (0);
 }
