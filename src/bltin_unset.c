@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bltin_unset.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 22:20:44 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/09 11:49:45 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/09 15:13:01 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,14 @@ int	mini_unset(char **strarr)
 	int	i;
 	int status;
 
+	status = 0;
 	if (strarr[1] == NULL)
 		return (0);
-	i = 0;
-	while (strarr[++i])
+	i = 1;
+	while (strarr[i])
 	{
 		status = micro_unset(strarr[i]);
+		i++;
 	}
-	return (0);
+	return (status);
 }

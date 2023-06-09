@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 02:18:56 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/09 12:07:05 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/09 14:26:47 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,12 @@ int	ismulticmd(char *strcmd)
 	return (0);
 }
 
+static void	exit_end(t_data *data, char **strcmd)
+{
+	free(strcmd[0]);
+	exit(end_environ(data));
+}
+
 // the child going to be parent for all program
 int	process(char *strcmd, t_data *data)
 {
@@ -45,7 +51,8 @@ int	process(char *strcmd, t_data *data)
 	cmdlist = str_split(strcmd, data);
 	// to execute
 	test_print(cmdlist);
-	if (cmdlist->next != NULL && ft_strchr(cmdlist->next->cmd, '|') != NULL)
+	// if (cmdlist->next != NULL && ft_strchr(cmdlist->next->cmd, '|') != NULL)
+	if (cmdlist->next == NULL && ft_strncmp(cmdlist->cmd[0], "exit", 5) == 0)
 	{
 		soloexit(cmdlist, data);
 		return (1);
@@ -78,7 +85,7 @@ int	main(void)
 		else if (ft_strlen(strcmd) > 0)
 			x = process(strcmd, &data);
 		if (x == 1)
-			exit_end(&data, strcmd);
+			exit_end(&data, &strcmd);
 		free(strcmd);
 	}
 	ft_putendl_fd("exit", 1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 23:18:15 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/09 12:00:52 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/09 13:18:24 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ typedef struct s_parser
 
 // minishell
 int			process(char *strcmd, t_data *data);
-void		soloexit(char *strcmd, t_data *data);
+void		soloexit(t_listcmd *cmdlist, t_data *data);
 
 // sig_handle
 void		sig_int_handler(int sig);

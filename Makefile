@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+         #
+#    By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/07 17:03:50 by kkaiyawo          #+#    #+#              #
-#    Updated: 2023/06/09 11:56:40 by kkaiyawo         ###   ########.fr        #
+#    Updated: 2023/06/09 13:50:12 by pruangde         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,8 @@ SRC_DIR			=	./src/
 BONUS_DIR		=	./bonus/
 LIB_DIR			=	./lib/
 BUILD_DIR		=	./build/
-READLINE_DIR	=	/usr/local/opt/readline/
+# READLINE_DIR	=	/usr/local/opt/readline/
+READLINE_DIR	=	${HOMEBREW_PREFIX}/opt/readline/
 
 ### FILES ###
 SRC_FILE		=	minishell.c env.c sig_handle.c debugger.c\
