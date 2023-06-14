@@ -3,19 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
+/*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 02:18:56 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/09 14:26:47 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/06/14 13:37:26 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	soloexit(t_listcmd *cmdlist, t_data *data)
+int	soloexecve(t_listcmd *cmdlist, t_data *data)
 {
-	data->exit_stat = mini_exit(cmdlist->cmd);
-	ft_putendl_fd("exit", 1);
+	if (cmdlist->next == NULL)
+	{
+		if (ft_strncmp(cmdlist->cmd[0], "exit", 5) == 0)
+			data->exit_stat = mini_exit(cmdlist->cmd) % 255;
+		else if (ft_strncmp(cmdlist->cmd[0], "export", 7) == 0)
+			data->exit_stat = mini_export(cmdlist->cmd) % 255;
+		else if (ft_strncmp(cmdlist->cmd[0], "unset", 6) == 0)
+			data->exit_stat = mini_unset(cmdlist->cmd) % 255;
+		else if (ft_strncmp(cmdlist->cmd[0], "cd", 3) == 0)
+			data->exit_stat = mini_cd(cmdlist->cmd) % 255;
+		else
+			data->exit_stat = executor(cmdlist, data->env) % 255;
+	}
+	else
+		data->exit_stat = executor(cmdlist, data->env) % 255;
+	if (cmdlist->next == NULL && ft_strncmp(cmdlist->cmd[0], "exit", 5) == 0)
+	{
+		ft_putendl_fd(cmdlist->cmd[0], 1);
+		return (1);
+	}
+	return (0);
 }
 
 int	ismulticmd(char *strcmd)
@@ -43,25 +62,19 @@ static void	exit_end(t_data *data, char **strcmd)
 // the child going to be parent for all program
 int	process(char *strcmd, t_data *data)
 {
-	// int		stat;
+	int		stat;
 	t_listcmd	*cmdlist;
 
 	cmdlist = NULL;
 	add_history(strcmd);
 	cmdlist = str_split(strcmd, data);
 	// to execute
-	test_print(cmdlist);
+	print_debug(1, cmdlist);
 	// if (cmdlist->next != NULL && ft_strchr(cmdlist->next->cmd, '|') != NULL)
-	if (cmdlist->next == NULL && ft_strncmp(cmdlist->cmd[0], "exit", 5) == 0)
-	{
-		soloexit(cmdlist, data);
-		return (1);
-	}
-	else
-		data->exit_stat = executor(cmdlist, data->env) % 255;
+	stat = soloexecve(cmdlist, data);
 	// data->exit_stat = to_execute(cmdlist);
 	cmdlist = free_cmdlist(cmdlist);
-	return (0);
+	return (stat);
 }
 
 int	main(void)
