@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 05:10:34 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/09 11:54:39 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/14 15:03:13 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,9 @@ int	init_environ(t_data *data)
 {
 	char	**tmp1;
 
-	if (!data)
+	tmp1 = ft_splitdup(environ);
+	if (!(tmp1))
 		exit(EXIT_FAILURE);
-	data->env = ft_splitdup(environ);
-	if (!(data->env))
-	{
-		free(data);
-		exit(EXIT_FAILURE);
-	}
-	tmp1 = data->env;
 	data->env = environ;
 	environ = tmp1;
 	data->exit_stat = 0;

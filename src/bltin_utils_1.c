@@ -6,7 +6,7 @@
 /*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 10:46:32 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/09 10:00:20 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/06/14 15:54:22 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,17 @@ char	**sp_splitndup(char **dst, char **src, int n)
 
 int	cx_validvar(char *name)
 {
+	int	i;
+
+	i = 1;
 	if (ft_isalpha(name[0]) || (name[0] == '_'))
-		return (0);
+	{
+		while (name[i] && (ft_isalnum(name[i]) || name[i] == '_'))
+			i++;
+		if (name[i] == 0)
+			return (0);
+		return (1);
+	}
 	else
 		return (1);
 	return (1);

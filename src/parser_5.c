@@ -6,13 +6,14 @@
 /*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 04:15:44 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/09 09:54:55 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/06/14 15:49:28 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 // if i++ == nothing malloc 
+
 static char	*getvarname_qm(char *str, t_c *c)
 {
 	char	*name;
@@ -25,12 +26,15 @@ static char	*getvarname_qm(char *str, t_c *c)
 		name[0] = '?';
 		(c->i)++;
 	}
-	else if (ft_isalnum(str[c->i]) == 0)
+	else if (ft_isalpha(str[c->i]) == 0 && str[c->i] != '_')
+	{
 		name = ft_calloc(1, sizeof(char));
+		(c->i)++;
+	}
 	else
 	{
 		st = c->i;
-		while (str[c->i] && (ft_isalnum(str[c->i]) == 1))
+		while (str[c->i] && (ft_isalnum(str[c->i]) == 1 || str[c->i] == '_'))
 			(c->i)++;
 		name = ft_strndup(str + st, (c->i - st));
 	}
