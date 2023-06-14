@@ -6,13 +6,13 @@
 /*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 22:20:44 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/09 15:13:01 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/06/14 14:16:53 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bltin.h"
 
-static char	**err_tmp_free(char **tofree)
+static char	**tmp_free(char **tofree)
 {
 	ft_free_p2p_char(tofree);
 	tofree[0] = NULL;
@@ -25,10 +25,11 @@ char	**envdup(int i, int it, char **tmp, int lim)
 	{
 		tmp[it] = ft_strdup(environ[i]);
 		if (tmp[it] == NULL)
-			return (err_tmp_free(tmp));
+			return (tmp_free(tmp));
 		i++;
 		it++;
 	}
+	tmp[lim - 1] = NULL;
 	return (tmp);
 }
 
@@ -44,15 +45,17 @@ int	micro_unset(char *todel)
 	pos = find_pos_env(todel);
 	count = count_element_p2p(environ);
 	tmp = (char **)malloc(count * sizeof(char *));
+	if (!tmp)
+		return (1);
 	i = 0;
-	tmp = envdup(i, i, tmp, pos);
+	tmp = envdup(i, i, tmp, pos + 1);
 	if (!tmp)
 		return (1);
 	i = pos + 1;
-	tmp = envdup(i, i - 1, tmp, count);
+	tmp = envdup(i, pos, tmp, count);
 	if (!tmp)
 		return (1);
-	environ = err_tmp_free(environ);
+	// environ = tmp_free(environ);
 	environ = tmp;
 	tmp = NULL;
 	return (0);
