@@ -6,7 +6,7 @@
 /*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 22:19:34 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/14 12:49:14 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/06/14 17:29:54 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ static void	print_echo(char **strarr, int st)
 int	mini_echo(char **strarr)
 {
 	if (strarr[1] == NULL)
+	{
+		ft_putchar_fd('\n', 1);
 		return (0);
+	}
 	if (strarr[1][0] == '-')
 	{
 		if (ft_strncmp(strarr[1], "-n", 3) == 0)
