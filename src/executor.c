@@ -6,7 +6,7 @@
 /*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 21:14:24 by kkaiyawo          #+#    #+#             */
-/*   Updated: 2023/06/08 12:55:09 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/14 08:39:55 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	executor_fork(t_parser *ps)
 {
 	t_list	*exec;
 	t_exec	*ex;
+	int		firetruck;
 
 	exec = ps->exec;
 	while (exec)
@@ -43,8 +44,8 @@ int	executor_fork(t_parser *ps)
 			return (errno);
 		else if (ex->pid == 0)
 		{
-			pipex_exec(exec->content, ps);
-			return (errno);
+			firetruck = pipex_exec(exec->content, ps);
+			exit(firetruck);
 		}
 		else
 			exec = exec->next;
