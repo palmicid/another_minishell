@@ -6,7 +6,7 @@
 /*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 15:03:36 by kkaiyawo          #+#    #+#             */
-/*   Updated: 2023/06/08 08:38:45 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/14 17:04:59 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	**ps_getpath(char **envp)
 			return (ft_split(envp[i] + 5, ':'));
 		i++;
 	}
-	path = malloc(sizeof(char *) + 2);
+	path = malloc(sizeof(char *) * 2);
 	if (!path)
 		return (NULL);
 	path[0] = ft_strdup("");

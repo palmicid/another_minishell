@@ -6,7 +6,7 @@
 /*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 10:18:11 by kkaiyawo          #+#    #+#             */
-/*   Updated: 2023/06/09 08:24:00 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/14 17:03:39 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ int	cmdcheck_path(char **cmd, t_parser *ps)
 
 	i = -1;
 	newpath = NULL;
+	if (ps->path == NULL)
+		executor_error(ps, cmd[0], CMD_ERROR, 127);
 	while (ps->path[++i] != NULL)
 	{
 		newpath = ft_strprepend(cmd[0], ps->path[i]);

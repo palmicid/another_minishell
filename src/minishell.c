@@ -6,7 +6,7 @@
 /*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 02:18:56 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/14 13:37:26 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/14 16:21:18 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ int	soloexecve(t_listcmd *cmdlist, t_data *data)
 		else if (ft_strncmp(cmdlist->cmd[0], "cd", 3) == 0)
 			data->exit_stat = mini_cd(cmdlist->cmd) % 255;
 		else
-			data->exit_stat = executor(cmdlist, data->env) % 255;
+			data->exit_stat = executor(cmdlist, environ) % 255;
 	}
 	else
-		data->exit_stat = executor(cmdlist, data->env) % 255;
+		data->exit_stat = executor(cmdlist, environ) % 255;
 	if (cmdlist->next == NULL && ft_strncmp(cmdlist->cmd[0], "exit", 5) == 0)
 	{
 		ft_putendl_fd(cmdlist->cmd[0], 1);
@@ -55,8 +55,12 @@ int	ismulticmd(char *strcmd)
 
 static void	exit_end(t_data *data, char **strcmd)
 {
+	int	n;
+
+	n = data->exit_stat;
 	free(strcmd[0]);
-	exit(end_environ(data));
+	end_environ(data);
+	exit(n);
 }
 
 // the child going to be parent for all program
@@ -98,7 +102,9 @@ int	main(void)
 		else if (ft_strlen(strcmd) > 0)
 			x = process(strcmd, &data);
 		if (x == 1)
+		{
 			exit_end(&data, &strcmd);
+		}
 		free(strcmd);
 	}
 	ft_putendl_fd("exit", 1);
