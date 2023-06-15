@@ -6,7 +6,7 @@
 /*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 11:50:14 by kkaiyawo          #+#    #+#             */
-/*   Updated: 2023/06/15 09:23:54 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/15 09:32:15 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int	heredoc_open(t_fileset *fs, t_parser *ps)
 	fs->fd = open("/tmp/heredoc", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	while (1)
 	{
+		write(1, fs->name, strlen(fs->name));
 		write(1, "> ", 2);
 		line = get_next_line(0);
 		if (ft_strncmp(line, name, strlen(name) + 1) == 0)
@@ -68,11 +69,10 @@ int	heredoc_open(t_fileset *fs, t_parser *ps)
 		if (line != NULL)
 			free(line);
 	}
-	if (line != NULL)
-		free(line);
+	line = ft_free(line);
 	file_close(&fs->fd);
 	fs->fd = open("/tmp/heredoc", O_RDONLY);
-	ft_free(name);
+	name = ft_free(name);
 	return (0);
 }
 

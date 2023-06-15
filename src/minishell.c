@@ -6,7 +6,7 @@
 /*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 02:18:56 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/14 16:21:18 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/15 09:30:15 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int	main(void)
 	signal_handling();
 	while (1)
 	{
-		strcmd = readline("minishell-0.9a$ ");
+		strcmd = readline("minishell-1.0 beta$ ");
 		if (!strcmd)
 			break ;
 		else if (strcmd[0] == '\0')
