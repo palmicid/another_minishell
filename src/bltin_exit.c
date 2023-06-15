@@ -6,7 +6,7 @@
 /*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 22:20:13 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/15 10:47:55 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/06/15 10:49:37 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,11 @@ static int	convert_code(char *str, long *code)
 		tmp += str[i++] - '0';
 	}
 	if (sign == -1 && (tmp > 0))
-		return (1);
+		return (-1);
 	else if ((sign == 1) && (tmp < 0))
-		return (1);
+		return (-1);
 	if (tmp > LONG_MAX)
-		return (1);
+		return (-1);
 	printf("RAW CODE == %ld\n", tmp);
 	if (sign == -1)
 		*code = minus_val(tmp * sign);
