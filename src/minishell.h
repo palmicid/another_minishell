@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 23:18:15 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/15 09:53:54 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/15 10:41:48 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -363,5 +363,6 @@ int			cx_validvar(char *name);
 int			free_reterr_export(char **ptr);
 void		bltin_err_msg(char *str);
 void		bltin_exiterr_msg(char *str);
+int			cx_signfirstpos(char *str, int *i);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 22:20:13 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/14 20:13:39 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/06/15 10:43:23 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,28 +51,27 @@ static int	cx_19aft(char *str)
 }
 
 // -1 on not OK, >= 0 if OK
-static int	convert_code(char *str, int *code)
+static int	convert_code(char *str, long *code)
 {
-	int					i;
-	int					sign;
-	unsigned long long	tmp;
-	unsigned long long	cmp;
+	int		i;
+	int		sign;
+	long	tmp;
 
-	i = 1;
-	sign = 1;
+	i = 0;
 	tmp = 0;
-	cmp = 9223372036854775807;
-	if (str[0] == '-')
-		sign = -1;
+	sign = cx_signfirstpos(str, &i);
 	while (str[i])
 	{
 		tmp *= 10;
-		tmp += str[i++] + '0';
+		tmp += str[i++] - '0';
 	}
-	if (sign == -1 && (tmp > cmp + 1))
+	if (sign == -1 && (tmp > 0))
+		return (1);
+	else if ((sign == 1) && (tmp < 0))
 		return (1);
 	if (tmp > LONG_MAX)
 		return (1);
+	printf("RAW CODE == %ld\n", tmp);
 	if (sign == -1)
 		*code = minus_val(tmp * sign);
 	else
