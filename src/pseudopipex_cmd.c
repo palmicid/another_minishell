@@ -6,7 +6,7 @@
 /*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 10:18:11 by kkaiyawo          #+#    #+#             */
-/*   Updated: 2023/06/15 09:57:14 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/15 10:48:45 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,4 +93,5 @@ int	cmdcheck_notpath(char **cmd, t_parser *ps)
 	{
 		executor_error(ps, cmd[0], FILE_ERROR, 127);
 	}
+	return (0);
 }
