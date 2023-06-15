@@ -6,7 +6,7 @@
 /*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 22:20:13 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/15 10:54:22 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/06/15 11:27:52 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ static int	convert_code(char *str, long *code)
 		tmp *= 10;
 		tmp += str[i++] - '0';
 	}
+	tmp *= sign;
 	if (sign == -1 && (tmp > 0))
 		return (1);
 	else if ((sign == 1) && (tmp < 0))
@@ -72,9 +73,9 @@ static int	convert_code(char *str, long *code)
 	if (tmp > LONG_MAX)
 		return (1);
 	if (sign == -1)
-		*code = minus_val(tmp * sign);
+		*code = minus_val(tmp);
 	else
-		*code = tmp % 256; 
+		*code = tmp % 256;
 	return (0);
 }
 
@@ -90,5 +91,6 @@ int	mini_exit(char **strarr)
 		return (exit_with_err(strarr[1]));
 	if (convert_code(strarr[1], &code))
 		return (exit_with_err(strarr[1]));
+	ft_putendl_fd("exit", 1);
 	return ((int)code);
 }
