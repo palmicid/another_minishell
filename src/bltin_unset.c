@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bltin_unset.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pruangde <pruangde@student.42.fr>          +#+  +:+       +#+        */
+/*   By: moonegg <moonegg@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 22:20:44 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/15 17:42:16 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/06/15 18:37:11 by moonegg          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	micro_unset(char *todel)
 	if (!tmp)
 		return (1);
 	i = 0;
-	tmp = envdup(i, i, tmp, pos + 1);
+	tmp = envdup(i, i, tmp, pos);
 	if (!tmp)
 		return (1);
 	i = pos + 1;

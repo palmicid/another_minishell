@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pruangde <pruangde@student.42.fr>          +#+  +:+       +#+        */
+/*   By: moonegg <moonegg@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 23:18:15 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/15 17:21:02 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/06/15 18:38:22 by moonegg          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct s_data
 	int					exit_stat;
 }						t_data;
 
-t_data g_data;
+extern t_data	g_data;
 
 /*
 typedef struct s_listcmd

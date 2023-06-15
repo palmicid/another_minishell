@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pruangde <pruangde@student.42.fr>          +#+  +:+       +#+        */
+/*   By: moonegg <moonegg@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 02:18:56 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/15 17:33:01 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/06/15 18:42:32 by moonegg          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+t_data	g_data;
 
 int	soloexecve(t_listcmd *cmdlist, t_data *data)
 {
@@ -83,8 +85,8 @@ int	main(int ac, char **av, char **env)
 	char	*strcmd;
 	int		x;
 
-	(void) ac;
 	(void) av;
+	g_data.exit_stat = ac - ac;
 	strcmd = NULL;
 	init_environ(env);
 	signal_handling();

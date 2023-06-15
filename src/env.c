@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pruangde <pruangde@student.42.fr>          +#+  +:+       +#+        */
+/*   By: moonegg <moonegg@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 05:10:34 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/15 16:50:18 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/06/15 18:44:59 by moonegg          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	init_environ(char **env)
 {
-
 	g_data.env = ft_splitdup(env);
 	if (!(g_data.env))
 		exit(EXIT_FAILURE);
