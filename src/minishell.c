@@ -6,7 +6,7 @@
 /*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 02:18:56 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/15 09:30:15 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/15 09:40:03 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	soloexecve(t_listcmd *cmdlist, t_data *data)
 		data->exit_stat = executor(cmdlist, environ) % 255;
 	if (cmdlist->next == NULL && ft_strncmp(cmdlist->cmd[0], "exit", 5) == 0)
 	{
-		ft_putendl_fd(cmdlist->cmd[0], 1);
+		//ft_putendl_fd(cmdlist->cmd[0], 1);
 		return (1);
 	}
 	return (0);
