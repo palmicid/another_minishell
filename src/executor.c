@@ -6,7 +6,7 @@
 /*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 21:14:24 by kkaiyawo          #+#    #+#             */
-/*   Updated: 2023/06/14 08:39:55 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/15 08:52:56 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	executor_fork(t_parser *ps)
 	exec = ps->exec;
 	while (exec)
 	{
+		signal_int_handling(2);		// TEST CHANGE HERE
 		ex = exec->content;
 		ex->pid = fork();
 		if (ex->pid == -1)
