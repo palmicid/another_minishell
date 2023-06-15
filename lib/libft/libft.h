@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bsirikam <bsirikam@student.42bangkok.co    +#+  +:+       +#+        */
+/*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 00:35:49 by pruangde          #+#    #+#             */
-/*   Updated: 2023/05/28 17:35:17 by bsirikam         ###   ########.fr       */
+/*   Updated: 2023/06/14 20:15:22 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ char	**ft_splitdup(char **origin);
 void	ft_free_p2p_char(char **ptr);
 char	*ft_freemanycharptr(char *ptr1, char **ptr2, char **ptr3, char **ptr4);
 int		sp_digit_pm(int c);
+int		sp_digit_pm_str(char *str);
 
 t_list	*ft_lstnew(void *content);
 void	ft_lstadd_front(t_list **lst, t_list *new);
