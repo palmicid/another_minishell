@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   bltin_utils_1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
+/*   By: pruangde <pruangde@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 10:46:32 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/09 10:00:20 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/06/15 17:23:53 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "bltin.h"
+#include "minishell.h"
 
 int	find_pos_env(char *tofind)
 {
@@ -23,9 +23,9 @@ int	find_pos_env(char *tofind)
 	if (!tf)
 		return (-1);
 	len = ft_strlen(tf);
-	while (environ[pos])
+	while (g_data.env[pos])
 	{
-		if (ft_strncmp(environ[pos], tf, len) == 0)
+		if (ft_strncmp(g_data.env[pos], tf, len) == 0)
 		{
 			free(tf);
 			return (pos);
@@ -66,8 +66,17 @@ char	**sp_splitndup(char **dst, char **src, int n)
 
 int	cx_validvar(char *name)
 {
+	int	i;
+
+	i = 1;
 	if (ft_isalpha(name[0]) || (name[0] == '_'))
-		return (0);
+	{
+		while (name[i] && (ft_isalnum(name[i]) || name[i] == '_'))
+			i++;
+		if (name[i] == 0)
+			return (0);
+		return (1);
+	}
 	else
 		return (1);
 	return (1);

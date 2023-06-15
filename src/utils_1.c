@@ -6,7 +6,7 @@
 /*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 00:48:21 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/08 08:08:06 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/15 09:58:48 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int	cont_char(char *str, int i, char c)
 }
 
 // 	-----------TEST-------------
+/*
 void	test_print(t_listcmd *head)
 {
 	t_listcmd	*ptr = head;
@@ -98,7 +99,7 @@ void	test_print(t_listcmd *head)
 		ptr = ptr->next;
 	}
 }
-
+*/
 // void	test_printstrcut(t_strcut *fwd)
 // {
 // 	t_strcut	*ptr;

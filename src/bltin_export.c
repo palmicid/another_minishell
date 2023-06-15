@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   bltin_export.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
+/*   By: pruangde <pruangde@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 22:20:25 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/09 10:56:47 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/06/15 17:24:46 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "bltin.h"
+#include "minishell.h"
 
 static int	sp_strcmp(char *s1, char *s2)
 {
@@ -58,7 +58,7 @@ static int	print_sortenv(void)
 	int		i;
 	int		count;
 
-	sort = ft_splitdup(environ);
+	sort = ft_splitdup(g_data.env);
 	if (!sort)
 		return (1);
 	count = count_element_p2p(sort) - 2;
@@ -77,16 +77,16 @@ int	add_newvar(char	*strvar)
 	int		count;
 	char	**tmp;
 
-	count = count_element_p2p(environ) + 1;
+	count = count_element_p2p(g_data.env) + 1;
 	tmp = (char **)malloc(sizeof(char *) * (count + 1));
 	if (!tmp)
 		return (1);
-	tmp = sp_splitndup(tmp, environ, count - 2);
+	tmp = sp_splitndup(tmp, g_data.env, count - 2);
 	tmp[count - 2] = ft_strdup(strvar);
-	tmp[count - 1] = ft_strdup(environ[count - 2]);
+	tmp[count - 1] = ft_strdup(g_data.env[count - 2]);
 	tmp[count] = NULL;
-	ft_free_p2p_char(environ);
-	environ = tmp;
+	ft_free_p2p_char(g_data.env);
+	g_data.env = tmp;
 	tmp = NULL;
 	return (0);
 }
@@ -103,11 +103,11 @@ int	mini_export(char **strarr)
 	if (find_charpos(strarr[1], '=') == -1)
 		return (0);
 	name = getvarname(strarr[1]);
-	if (getenv(name))
+	if (my_getenv(name))
 	{
 		pos = find_pos_env(name);
-		free(environ[pos]);
-		environ[pos] = ft_strdup(strarr[1]);
+		free(g_data.env[pos]);
+		g_data.env[pos] = ft_strdup(strarr[1]);
 	}
 	else
 	{

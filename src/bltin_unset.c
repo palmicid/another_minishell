@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   bltin_unset.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pruangde <pruangde@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 22:20:44 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/08 15:42:59 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/15 17:42:16 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "bltin.h"
+#include "minishell.h"
 
-static char	**err_tmp_free(char **tofree)
+static char	**tmp_free(char **tofree)
 {
 	ft_free_p2p_char(tofree);
 	tofree[0] = NULL;
@@ -21,39 +21,59 @@ static char	**err_tmp_free(char **tofree)
 
 char	**envdup(int i, int it, char **tmp, int lim)
 {
-	while (environ[i] && (i < lim))
+	while (g_data.env[i] && (i < lim))
 	{
-		tmp[it] = ft_strdup(environ[i]);
+		tmp[it] = ft_strdup(g_data.env[i]);
 		if (tmp[it] == NULL)
-			return (err_tmp_free(tmp));
+			return (tmp_free(tmp));
 		i++;
 		it++;
 	}
+	tmp[lim - 1] = NULL;
 	return (tmp);
 }
 
-void	mini_unset(char *todel)
+int	micro_unset(char *todel)
 {
 	int		i;
 	int		pos;
 	int		count;
 	char	**tmp;
 
-	if ((todel == NULL) || (getenv(todel) == NULL))
-		return ;
+	if ((todel == NULL) || (my_getenv(todel) == NULL))
+		return (1);
 	pos = find_pos_env(todel);
-	count = count_element_p2p(environ);
+	count = count_element_p2p(g_data.env);
 	tmp = (char **)malloc(count * sizeof(char *));
+	if (!tmp)
+		return (1);
 	i = 0;
-	tmp = envdup(i, i, tmp, pos);
+	tmp = envdup(i, i, tmp, pos + 1);
 	if (!tmp)
-		return ;
+		return (1);
 	i = pos + 1;
-	tmp = envdup(i, i - 1, tmp, count);
+	tmp = envdup(i, pos, tmp, count);
 	if (!tmp)
-		return ;
-	environ = err_tmp_free(environ);
-	environ = tmp;
+		return (1);
+	ft_free_p2p_char(g_data.env);
+	g_data.env = tmp;
 	tmp = NULL;
-	return ;
+	return (0);
+}
+
+int	mini_unset(char **strarr)
+{
+	int	i;
+	int	status;
+
+	status = 0;
+	if (strarr[1] == NULL)
+		return (0);
+	i = 1;
+	while (strarr[i])
+	{
+		status = micro_unset(strarr[i]);
+		i++;
+	}
+	return (status);
 }

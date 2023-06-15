@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
+/*   By: pruangde <pruangde@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 23:18:15 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/09 09:06:16 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/06/15 17:21:02 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,14 @@
 # include <termios.h>
 # include <sys/types.h>
 # include <sys/wait.h>
-# include "backend.h"
-# include "bltin.h"
+# include <sys/errno.h>
+
+# ifndef DEBUG
+#  define DEBUG 0
+# endif
+# ifdef DEBUG
+#  define DEBUG 0
+# endif
 
 typedef struct s_data
 {
@@ -41,7 +47,7 @@ typedef struct s_data
 	int					exit_stat;
 }						t_data;
 
-extern char		**environ;
+t_data g_data;
 
 /*
 typedef struct s_listcmd
@@ -66,19 +72,76 @@ typedef struct s_strcut
 	struct s_strcut	*next;
 }					t_strcut;
 
+typedef enum e_filetype
+{
+	STDIN,
+	STDOUT,
+	INFILE,
+	HEREDOC,
+	OUTFILE,
+	APPEND,
+	PIPE,
+}	t_filetype;
+
+typedef enum e_error
+{
+	PIPE_ERROR,
+	FORK_ERROR,
+	CMD_ERROR,
+	FILE_ERROR,
+	ACCESS_ERROR,
+	OPEN_ERROR,
+	CLOSE_ERROR,
+	EXEC_ERROR,
+	ALLOC_ERROR,
+}	t_error;
+
+typedef struct s_listcmd
+{
+	char				**cmd;
+	struct s_listcmd	*next;
+}	t_listcmd;
+typedef struct s_fileset
+{
+	char		*name;
+	int			fd;
+	t_filetype	type;
+}	t_fileset;
+
+typedef struct s_exec
+{
+	pid_t	pid;
+	int		pipefd[2];
+	t_list	*cmdlst;
+	char	**cmdarr;
+	t_list	*infile;
+	t_list	*outfile;
+}	t_exec;
+
+typedef struct s_parser
+{
+	char	**envp;
+	char	**path;
+	t_list	*exec;
+	int		status;
+}	t_parser;
+
 // minishell
-void		process(char *strcmd, t_data *data);
+int			process(char *strcmd);
+void		soloexit(t_listcmd *cmdlist, t_data *data);
 
 // sig_handle
 void		sig_int_handler(int sig);
 void		signal_handling(void);
+void		sig_int_handler_noredis(int sig);
+void		signal_int_handling(int mode);
 
 // env
-int			init_environ(t_data *data);
-int			end_environ(t_data *data);
+int			init_environ(char **env);
+int			end_environ(void);
 
 // parser_1 - main split + split long list to cmd
-t_listcmd		*str_split(char *str, t_data *data);
+t_listcmd	*str_split(char *str);
 
 // parser_2 - quote split and add stat q or nonq
 t_strcut	*qsp_split(char *str);
@@ -87,10 +150,10 @@ t_strcut	*qsp_split(char *str);
 t_strcut	*meta_split(t_strcut *head);
 
 // parser_4 - remove quote
-t_strcut	*remove_q_xpand(t_strcut *head, t_data *data);
+t_strcut	*remove_q_xpand(t_strcut *head);
 
 // parser_5 - expand
-void		expand_var(t_strcut *tmp, t_data *data);
+void		expand_var(t_strcut *tmp);
 
 // parser_6 - join str from list
 void		lst_strjoin(t_strcut *current, t_strcut **tmp);
@@ -131,16 +194,180 @@ t_listcmd	*free_cmdlist(t_listcmd *lstcmd);
 // utils_5
 t_strcut	*inside_cxmetavalid(t_strcut **head, char *str);
 t_strcut	*createnew_strcut(void);
-t_listcmd		*createnew_lstcmd(void);
+t_listcmd	*createnew_lstcmd(void);
 t_c			*create_countptr(void);
+char		*my_getenv(char *str);
 // err_msg
 void		err_redirpipe(char *str);
 void		err_q_nopair(void);
 void		err_redir(void);
 
 // execute
+// debugger.c
+void		print_debug(int argc, ...);
+
+// parser_utils.c
+/* ****************************************************************************
+initializes the t_parser struct
+**************************************************************************** */
+t_parser	*ps_init(char **envp);
+/* ****************************************************************************
+get PATH from envp
+**************************************************************************** */
+char		**ps_getpath(char **envp);
+/* ****************************************************************************
+free t_exec struct
+**************************************************************************** */
+void		*ps_free(void *ps);
+void		ps_free2(void *ps);
+
+// exec_utils.c
+/* ****************************************************************************
+initializes the t_exec struct
+**************************************************************************** */
+t_exec		*exec_init(void);
+/* ****************************************************************************
+free t_parser struct
+**************************************************************************** */
+void		*exec_free(void *exec);
+void		exec_free2(void *exec);
+
+// fs_utils.c
+/* ****************************************************************************
+initializes the t_fileset struct
+**************************************************************************** */
+t_fileset	*fs_init(char *name, int fd, t_filetype type);
+/* ****************************************************************************
+free t_fileset struct
+**************************************************************************** */
+void		*fs_free(void *ptr);
+void		fs_free2(void *ptr);
+/* ****************************************************************************
+check access for all t_fileset in the list
+- return 0 if all access is ok, otherwise return errno
+- set fd to the file descriptor of the last t_fileset in the list
+**************************************************************************** */
+int			fs_check(t_list *fslst, int *fd, t_parser *ps);
+/* ****************************************************************************
+close all non-pipe non-std fd in the list that is not intended to leave open
+**************************************************************************** */
+void		fs_close(t_list *fslst, int ignore[2]);
+
+// file_utils.c
+/* ****************************************************************************
+check file access, open it and set fd to the file descriptor
+**************************************************************************** */
+int			file_open(t_fileset *fs, t_parser *ps);
+/* ****************************************************************************
+create a heredoc file and set fd to the file descriptor
+**************************************************************************** */
+int			heredoc_open(t_fileset *fs, t_parser *ps);
+/* ****************************************************************************
+close fd and set to INT_MIN
+**************************************************************************** */
+void		file_close(int *fd);
+
+// arr_utils.c
+/* ****************************************************************************
+convert t_list to char **arr
+**************************************************************************** */
+char		**lst2arr(t_list *lst);
+/* ****************************************************************************
+free char **arr
+**************************************************************************** */
+char		**ft_arrclear(char **arr);
+
+// malloc_utils.c
+/* ****************************************************************************
+free the pointer and return null to the pointer
+**************************************************************************** */
+void		*ft_free(void *ptr);
+
+// parser.c
+/* ****************************************************************************
+parses the command line arguments
+**************************************************************************** */
+t_parser	*parser(t_listcmd *cmdlst, char **envp);
+/* ****************************************************************************
+parses t_listcmd to t_exec
+**************************************************************************** */
+t_exec		*parse2exec(t_listcmd *lc);
+/* ****************************************************************************
+parses the command line arguments to t_fileset
+**************************************************************************** */
+void		parse2fs(char **str, int i, t_exec *exec);
+/* ****************************************************************************
+redirect to pipe for all processes
+**************************************************************************** */
+void		parser_addpipe(t_list *ptr, t_parser *ps);
+
+// executor.c
+/* ****************************************************************************
+executes the command line arguments
+**************************************************************************** */
+int			executor(t_listcmd *lc, char **envp);
+/* ****************************************************************************
+forks the processes and executes the command line arguments
+**************************************************************************** */
+int			executor_fork(t_parser *ps);
+int			executor_wait(t_parser *ps);
+
+// executor_utils.c
+/* ****************************************************************************
+free the t_parser struct and return the status
+**************************************************************************** */
+int			executor_free(t_parser *ps);
+/* ****************************************************************************
+handle the error in executor
+**************************************************************************** */
+int			executor_error(t_parser *ps, char *msg, t_error err, int errnum);
+
+// pseudopipex.c
+/* ****************************************************************************
+execute the command line arguments in t_exec
+**************************************************************************** */
+int			pipex_exec(t_exec *exec, t_parser *ps);
+/* ****************************************************************************
+redirect fd to stdin and stdout
+**************************************************************************** */
+void		dup_close(int *fd);
+/* ****************************************************************************
+close all the unnecessary fd, leaving ignore'th pipe fd open
+**************************************************************************** */
+void		pipex_close(t_parser *ps, int ig0, int ig1);
+/* ****************************************************************************
+execute builtin commands and exit
+**************************************************************************** */
+int			execve_builtin(t_exec *exec, t_parser *ps, int *stat);
+
+// pseudopipex_cmd.c
+/* ****************************************************************************
+find $PATH environment that contains the command
+**************************************************************************** */
+int			cmd_findpath(char **cmd, t_parser *ps);
+/* ****************************************************************************
+prepend the first string with <s2/>
+**************************************************************************** */
+char		*ft_strprepend(char *s1, char *s2);
+int			cmdcheck_path(char **cmd, t_parser *ps);
+int			cmdcheck_notpath(char **cmd, t_parser *ps);
 
 // built_in
+int			mini_echo(char **strarr);
+int			mini_cd(char **strarr);
+int			mini_pwd(char **strarr);
+int			mini_export(char **strarr);
+int			mini_unset(char **strarr);
+int			mini_env(char **strarr);
+int			mini_exit(char **strarr);
 
+int			find_pos_env(char *tofind);
+char		*getvarname(char *str);
+char		**sp_splitndup(char **dst, char **src, int n);
+int			cx_validvar(char *name);
+int			free_reterr_export(char **ptr);
+void		bltin_err_msg(char *str);
+void		bltin_exiterr_msg(char *str);
+int			cx_signfirstpos(char *str, int *i);
 
 #endif

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+         #
+#    By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/07 17:03:50 by kkaiyawo          #+#    #+#              #
-#    Updated: 2023/06/09 10:00:28 by pruangde         ###   ########.fr        #
+#    Updated: 2023/06/15 15:19:06 by kkaiyawo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ BONUS_DIR		=	./bonus/
 LIB_DIR			=	./lib/
 BUILD_DIR		=	./build/
 READLINE_DIR	=	/usr/local/opt/readline/
+# READLINE_DIR	=	${HOMEBREW_PREFIX}/opt/readline/
 
 ### FILES ###
 SRC_FILE		=	minishell.c env.c sig_handle.c debugger.c\
@@ -46,7 +47,7 @@ BONUS_OBJ		=	${BONUS:.c=.o}
 
 ### COMPILATION ###
 CC				=	gcc
-CFLAG			=	-g -Wall -Wextra -Werror
+CFLAG			=	-g -Wall -Wextra -Werror #-fsanitize=address
 RM				=	rm -rf
 RLINCL			=	-I$(READLINE_DIR)include/
 RLLIB			=	-lreadline -L$(READLINE_DIR)lib/
@@ -60,7 +61,7 @@ bonus:			${LIB} ${BUILD_DIR} ${BONUS_OBJ}
 					${CC} ${CFLAG} -o ${NAME} ${BONUS_OBJ} ${LIB}
 
 ${LIB}:
-					find ${LIB_DIR} -mindepth 1 -maxdepth 1 -exec make bonus -C {} \;
+					find ${LIB_DIR} -mindepth 1 -maxdepth 1 -exec make -C {} \;
 
 ${BUILD_DIR}:
 					mkdir -p ${BUILD_DIR}

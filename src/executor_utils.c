@@ -6,7 +6,7 @@
 /*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 09:52:18 by kkaiyawo          #+#    #+#             */
-/*   Updated: 2023/06/08 13:53:06 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/15 13:34:34 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	executor_error(t_parser *ps, char *msg, t_error err, int errnum)
 		ft_putendl_fd("command not found", 2);
 	else if (err == ACCESS_ERROR)
 		ft_putendl_fd("Permission denied", 2);
+	else if (err == FILE_ERROR)
+		ft_putendl_fd("No such file or directory", 2);
 	else
 		ft_putendl_fd(strerror(errnum), 2);
 	ps_free(ps);

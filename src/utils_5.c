@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_5.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pruangde <pruangde@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 17:27:40 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/07 18:34:34 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/15 17:28:56 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,29 @@ t_c	*create_countptr(void)
 	new->j = 0;
 	new->st = 0;
 	return (new);
+}
+
+// return ptr to env var data (after '=')
+char	*my_getenv(char *str)
+{
+	int		i;
+	char	*cmp;
+
+	i = 0;
+	cmp = ft_strjoin(str, "=");
+	if (!cmp)
+		return (NULL);
+	while (g_data.env[i])
+	{
+		if (ft_strncmp(g_data.env[i], cmp, ft_strlen(cmp)) == 0)
+		{
+			free(cmp);
+			cmp = ft_strchr(g_data.env[i], '=');
+			cmp++;
+			return (cmp);
+		}
+		i++;
+	}
+	free(cmp);
+	return (NULL);
 }

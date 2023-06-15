@@ -6,7 +6,7 @@
 /*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 10:18:11 by kkaiyawo          #+#    #+#             */
-/*   Updated: 2023/06/08 14:32:46 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/15 13:33:03 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,19 @@
 int	cmd_findpath(char **cmd, t_parser *ps)
 {
 	if (ft_strncmp(cmd[0], "echo", 5) == 0)
-		mini_echo(cmd);
+		return (0);
 	if (ft_strncmp(cmd[0], "cd", 3) == 0)
-		mini_cd(cmd);
+		return (0);
 	if (ft_strncmp(cmd[0], "pwd", 4) == 0)
-		mini_pwd(cmd);
+		return (0);
 	if (ft_strncmp(cmd[0], "export", 7) == 0)
-		mini_export(cmd);
+		return (0);
 	if (ft_strncmp(cmd[0], "unset", 6) == 0)
-		mini_unset(cmd);
+		return (0);
 	if (ft_strncmp(cmd[0], "env", 4) == 0)
-		mini_env(cmd);
+		return (0);
 	if (ft_strncmp(cmd[0], "exit", 5) == 0)
-		mini_exit(cmd);
+		return (0);
 	if (ft_strchr(cmd[0], '/') == NULL)
 		return (cmdcheck_path(cmd, ps));
 	else
@@ -41,8 +41,11 @@ int	cmdcheck_path(char **cmd, t_parser *ps)
 
 	i = -1;
 	newpath = NULL;
+	if (ps->path == NULL || ps->path[0] == NULL)
+		return (cmdcheck_notpath(cmd, ps));
 	while (ps->path[++i] != NULL)
 	{
+		print_debug(2, "Checking path ", ps->path[i]);
 		newpath = ft_strprepend(cmd[0], ps->path[i]);
 		if (access(newpath, F_OK) == 0)
 		{
@@ -55,7 +58,7 @@ int	cmdcheck_path(char **cmd, t_parser *ps)
 		newpath = ft_free(newpath);
 	}
 	executor_error(ps, cmd[0], CMD_ERROR, 127);
-	return(127);
+	return (127);
 }
 
 char	*ft_strprepend(char *s1, char *s2)
@@ -83,7 +86,6 @@ int	cmdcheck_notpath(char **cmd, t_parser *ps)
 		if (access(cmd[0], X_OK) != 0)
 		{
 			executor_error(ps, cmd[0], ACCESS_ERROR, 126);
-			return (126); //Permission denied
 		}
 		else
 			return (0);
@@ -91,6 +93,6 @@ int	cmdcheck_notpath(char **cmd, t_parser *ps)
 	else
 	{
 		executor_error(ps, cmd[0], FILE_ERROR, 127);
-		return (127); //No such file or directory
 	}
+	return (0);
 }

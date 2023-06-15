@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free_p2p.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
+/*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:24:04 by pruangde          #+#    #+#             */
-/*   Updated: 2023/05/26 15:16:35 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/06/15 15:28:07 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,12 @@ void	ft_free_p2p_char(char **ptr)
 	int	i;
 
 	i = 0;
+	if (ptr == NULL)
+		return ;
 	while (ptr[i])
 	{
-		free(ptr[i]);
+		if (ptr[i] != NULL)
+			free(ptr[i]);
 		i++;
 	}
 	free(ptr);

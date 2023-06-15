@@ -6,7 +6,7 @@
 /*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 15:03:36 by kkaiyawo          #+#    #+#             */
-/*   Updated: 2023/06/08 08:38:45 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/15 13:32:35 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,16 @@ char	**ps_getpath(char **envp)
 			return (ft_split(envp[i] + 5, ':'));
 		i++;
 	}
-	path = malloc(sizeof(char *) + 2);
+	path = malloc(sizeof(char *) * 1);
 	if (!path)
 		return (NULL);
-	path[0] = ft_strdup("");
-	path[1] = NULL;
+	path[0] = NULL;
 	return (path);
 }
 
 void	*ps_free(void *ps)
 {
-	t_parser *pss;
+	t_parser	*pss;
 
 	pss = (t_parser *) ps;
 	if (!pss)
@@ -64,7 +63,7 @@ void	*ps_free(void *ps)
 
 void	ps_free2(void *ps)
 {
-	t_parser *pss;
+	t_parser	*pss;
 
 	pss = (t_parser *) ps;
 	if (!pss)

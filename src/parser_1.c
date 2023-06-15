@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_1.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pruangde <pruangde@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 09:52:30 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/07 18:34:34 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/15 17:05:33 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static t_listcmd	*fusion_and_sepcmd(t_strcut *liststr)
 {
 	t_listcmd		*headcmd;
 	t_listcmd		*nowcmd;
-	t_strcut	*curstr;
+	t_strcut		*curstr;
 
 	curstr = liststr;
 	headcmd = createnew_lstcmd();
@@ -98,10 +98,10 @@ static t_listcmd	*fusion_and_sepcmd(t_strcut *liststr)
 }
 
 // find ' ' or " " if cannot find pair set all as a string
-t_listcmd	*str_split(char *str, t_data *data)
+t_listcmd	*str_split(char *str)
 {
 	t_strcut	*liststr;
-	t_listcmd		*listcmd;
+	t_listcmd	*listcmd;
 
 	liststr = qsp_split(str);
 	if (!liststr)
@@ -109,7 +109,7 @@ t_listcmd	*str_split(char *str, t_data *data)
 	liststr = meta_split(liststr);
 	if (!liststr)
 		return (NULL);
-	liststr = remove_q_xpand(liststr, data);
+	liststr = remove_q_xpand(liststr);
 	if (!liststr)
 		return (NULL);
 	listcmd = fusion_and_sepcmd(liststr);

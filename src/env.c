@@ -3,43 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
+/*   By: pruangde <pruangde@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 05:10:34 by pruangde          #+#    #+#             */
-/*   Updated: 2023/05/30 17:21:16 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/06/15 16:50:18 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	init_environ(t_data *data)
+int	init_environ(char **env)
 {
-	char	**tmp1;
 
-	if (!data)
+	g_data.env = ft_splitdup(env);
+	if (!(g_data.env))
 		exit(EXIT_FAILURE);
-	data->env = ft_splitdup(environ);
-	if (!(data->env))
-	{
-		free(data);
-		exit(EXIT_FAILURE);
-	}
-	tmp1 = data->env;
-	data->env = environ;
-	environ = tmp1;
-	data->exit_stat = 0;
+	g_data.exit_stat = 0;
 	return (0);
 }
 
-int	end_environ(t_data *data)
+int	end_environ(void)
 {
-	char	**tmp;
-
-	tmp = data->env;
-	data->env = environ;
-	environ = tmp;
-	ft_free_p2p_char(data->env);
-	data->env = NULL;
-	free(data);
+	ft_free_p2p_char(g_data.env);
+	g_data.env = NULL;
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_4.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
+/*   By: pruangde <pruangde@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 09:35:55 by pruangde          #+#    #+#             */
-/*   Updated: 2023/05/30 17:00:55 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/06/15 17:30:04 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,14 +93,14 @@ static t_strcut	*creat_q_strcutlst(char *str)
 // 3. find if any $ and convert follow stat setting
 // 4. join all str together --> free old and replace by newone
 // run in str if find
-static void	remove_qproc(t_strcut *current, t_data *data)
+static void	remove_qproc(t_strcut *current)
 {
 	t_strcut	*tmp;
 
 	tmp = creat_q_strcutlst(current->str);
 	if (!tmp)
 		return (set_error(current));
-	expand_var(tmp, data);
+	expand_var(tmp);
 	if (tmp->stat == -1)
 	{
 		set_error(current);
@@ -116,7 +116,7 @@ static void	remove_qproc(t_strcut *current, t_data *data)
 // if have q in str split it remove q and expand
 // bef == list before ptr, aft == list after ptr if any
 // remove q and expand
-t_strcut	*remove_q_xpand(t_strcut *head, t_data *data)
+t_strcut	*remove_q_xpand(t_strcut *head)
 {
 	t_strcut	*ptr;
 
@@ -128,7 +128,7 @@ t_strcut	*remove_q_xpand(t_strcut *head, t_data *data)
 		{
 			if (find_q_doll(ptr->str))
 			{
-				remove_qproc(ptr, data);
+				remove_qproc(ptr);
 				if (ptr->stat == -1)
 					return (free_strcutlist(&head));
 			}

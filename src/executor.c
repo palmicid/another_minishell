@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pruangde <pruangde@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 21:14:24 by kkaiyawo          #+#    #+#             */
-/*   Updated: 2023/06/08 12:55:09 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/15 17:31:44 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ int	executor(t_listcmd *lc, char **envp)
 
 	ps = parser(lc, envp);
 	if (!ps)
-		return (ENOMEM); // needs fix when error is done
+		return (ENOMEM);
 	status = executor_fork(ps);
 	if (status != 0)
-		return (status); // needs fix when error is done
+		return (status);
 	pipex_close(ps, 0, 1);
 	status = executor_wait(ps);
 	ps_free(ps);
@@ -33,18 +33,20 @@ int	executor_fork(t_parser *ps)
 {
 	t_list	*exec;
 	t_exec	*ex;
+	int		firetruck;
 
 	exec = ps->exec;
 	while (exec)
 	{
+		signal_int_handling(2);
 		ex = exec->content;
 		ex->pid = fork();
 		if (ex->pid == -1)
 			return (errno);
 		else if (ex->pid == 0)
 		{
-			pipex_exec(exec->content, ps);
-			return (errno);
+			firetruck = pipex_exec(exec->content, ps);
+			exit(firetruck);
 		}
 		else
 			exec = exec->next;
@@ -65,5 +67,5 @@ int	executor_wait(t_parser *ps)
 		waitpid(ex->pid, &status, 0);
 		exec = exec->next;
 	}
-	return (status);
+	return (WEXITSTATUS(status));
 }

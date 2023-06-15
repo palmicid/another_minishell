@@ -6,7 +6,7 @@
 /*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 20:56:41 by kkaiyawo          #+#    #+#             */
-/*   Updated: 2023/06/08 12:07:36 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/15 09:55:08 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_parser	*parser(t_listcmd *lc, char **envp)
 	return (ps);
 }
 
-t_exec	*parse2exec(t_listcmd *lc) //check malloc error
+t_exec	*parse2exec(t_listcmd *lc)
 {
 	t_exec		*exec;
 	char		*str;
@@ -67,22 +67,22 @@ void	parse2fs(char **str, int i, t_exec *exec)
 	if (ft_strncmp(str[i], "<", 2) == 0)
 	{
 		ft_lstadd_back(&exec->infile,
-		ft_lstnew(fs_init(str[i + 1], INT_MIN, INFILE)));
+			ft_lstnew(fs_init(str[i + 1], INT_MIN, INFILE)));
 	}
 	if (ft_strncmp(str[i], "<<", 3) == 0)
 	{
 		ft_lstadd_back(&exec->infile,
-		ft_lstnew(fs_init(str[i + 1], INT_MIN, HEREDOC)));
+			ft_lstnew(fs_init(str[i + 1], INT_MIN, HEREDOC)));
 	}
 	if (ft_strncmp(str[i], ">", 2) == 0)
 	{
 		ft_lstadd_back(&exec->outfile,
-		ft_lstnew(fs_init(str[i + 1], INT_MIN, OUTFILE)));
+			ft_lstnew(fs_init(str[i + 1], INT_MIN, OUTFILE)));
 	}
 	if (ft_strncmp(str[i], ">>", 3) == 0)
 	{
 		ft_lstadd_back(&exec->outfile,
-		ft_lstnew(fs_init(str[i + 1], INT_MIN, APPEND)));
+			ft_lstnew(fs_init(str[i + 1], INT_MIN, APPEND)));
 	}
 }
 
@@ -98,20 +98,18 @@ void	parser_addpipe(t_list *ptr, t_parser *ps)
 		if (exec->outfile == NULL)
 		{
 			ft_lstadd_back(&exec->outfile,
-			ft_lstnew(fs_init("outpipe", exec->pipefd[1], PIPE)));
+				ft_lstnew(fs_init("outpipe", exec->pipefd[1], PIPE)));
 			if (exec->outfile == NULL)
 				executor_error(ps, "malloc", ALLOC_ERROR, errno);
-			print_debug(2, "redirect outfile to fd", ft_itoa(exec->pipefd[1]));
 		}
 		ptr = ptr->next;
 		exec = ptr->content;
 		if (exec->infile == NULL)
 		{
 			ft_lstadd_back(&exec->infile,
-			ft_lstnew(fs_init("inpipe", prevpipe, PIPE)));
+				ft_lstnew(fs_init("inpipe", prevpipe, PIPE)));
 			if (exec->infile == NULL)
 				executor_error(ps, "malloc", ALLOC_ERROR, errno);
-			print_debug(2, "redirect infile to fd", ft_itoa(prevpipe));
 		}
 	}
 }

@@ -3,46 +3,57 @@
 /*                                                        :::      ::::::::   */
 /*   bltin_cd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pruangde <pruangde@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 22:19:23 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/08 14:29:44 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/15 17:24:45 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "bltin.h"
-
-// cx arg if more than 1 stop
-// --> too many arguments
-// cx access dir path if no stop
-// --> no such file or directory
-
-// change environ PWD and OLDPWD
-// set current PWD to OLDPWD and use getcwd to replace in PWD
+#include "minishell.h"
 
 static void	set_newpwdenv(int oldpwd, int pwd)
 {
-	char *curdir;
+	char	*curdir;
 
 	curdir = getcwd(NULL, 0);
-	if ((oldpwd != -1) && (pwd == -1)) // oldpwd OK pwd -1
+	if ((oldpwd != -1) && (pwd == -1))
 	{
-		free(environ[oldpwd]);
-		environ[oldpwd] = ft_strjoin("OLDPWD=", NULL);
+		free(g_data.env[oldpwd]);
+		g_data.env[oldpwd] = ft_strjoin("OLDPWD=", "");
 	}
-	else if ((oldpwd == -1) && (pwd != -1)) // oldpwd -1 pwd OK
+	else if ((oldpwd == -1) && (pwd != -1))
 	{
-		free(environ[pwd]);
-		environ[oldpwd] = ft_strjoin("PWD=", NULL);
+		free(g_data.env[pwd]);
+		g_data.env[oldpwd] = ft_strjoin("PWD=", "");
 	}
-	else if ((oldpwd != -1) && (pwd != -1)) // both OK
+	else if ((oldpwd != -1) && (pwd != -1))
 	{
-		free(environ[oldpwd]);
-		environ[oldpwd] = ft_strjoin("OLD", environ[pwd]);
-		free(environ[pwd]);
-		environ[pwd] = ft_strjoin("PWD=", curdir);
+		free(g_data.env[oldpwd]);
+		g_data.env[oldpwd] = ft_strjoin("OLD", g_data.env[pwd]);
+		free(g_data.env[pwd]);
+		g_data.env[pwd] = ft_strjoin("PWD=", curdir);
 	}
 	free(curdir);
+}
+
+char	*addhomepath(char **strarr)
+{
+	char	*path;
+
+	path = ft_strdup(my_getenv("HOME"));
+	if (!path)
+		return (NULL);
+	if (strarr[1])
+	{
+		if (ft_strlen(strarr[1]) > 1)
+		{
+			path = ssp_strjoin(path, &strarr[1][1], 1, 0);
+			if (!path)
+				return (NULL);
+		}
+	}
+	return (path);
 }
 
 // wait fix arg
@@ -50,22 +61,26 @@ int	mini_cd(char **strarr)
 {
 	int		oldpwd;
 	int		pwd;
+	char	*tohome;
 
 	oldpwd = find_pos_env("OLDPWD");
 	pwd = find_pos_env("PWD");
-	if ((strarr == NULL) || (ft_strncmp(strarr, "~", 2) == 0))
+	if (strarr[1] == NULL)
 	{
-		if (chdir(getenv("HOME")) == -1)
+		tohome = addhomepath(strarr);
+		if (chdir(tohome) == -1 || !tohome)
 		{
-			bltin_err_msg(getenv("HOME"));
-			return ;
+			bltin_err_msg(my_getenv("HOME"));
+			free(tohome);
+			return (1);
 		}
+		free(tohome);
 	}
-	else if (chdir(strarr) == -1)
+	else if (chdir(strarr[1]) == -1)
 	{
-		bltin_err_msg(strarr);
-		return ;
+		bltin_err_msg(strarr[1]);
+		return (1);
 	}
 	set_newpwdenv(oldpwd, pwd);
-	return ;
+	return (0);
 }
