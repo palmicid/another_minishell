@@ -6,7 +6,7 @@
 /*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 16:01:54 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/15 10:42:21 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/06/15 10:54:36 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	bltin_err_msg(char *str)
 
 void	bltin_exiterr_msg(char *str)
 {
-	ft_putchar_fd('\n', 2);
 	ft_putstr_fd("Minishell: ", 2);
 	ft_putstr_fd(str, 2);
 	ft_putstr_fd(": ", 2);
