@@ -6,7 +6,7 @@
 /*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 15:03:36 by kkaiyawo          #+#    #+#             */
-/*   Updated: 2023/06/14 17:04:59 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/15 09:55:45 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	**ps_getpath(char **envp)
 
 void	*ps_free(void *ps)
 {
-	t_parser *pss;
+	t_parser	*pss;
 
 	pss = (t_parser *) ps;
 	if (!pss)
@@ -64,7 +64,7 @@ void	*ps_free(void *ps)
 
 void	ps_free2(void *ps)
 {
-	t_parser *pss;
+	t_parser	*pss;
 
 	pss = (t_parser *) ps;
 	if (!pss)

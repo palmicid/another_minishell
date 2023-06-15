@@ -6,7 +6,7 @@
 /*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 09:52:30 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/07 18:34:34 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/15 09:55:27 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static t_listcmd	*fusion_and_sepcmd(t_strcut *liststr)
 {
 	t_listcmd		*headcmd;
 	t_listcmd		*nowcmd;
-	t_strcut	*curstr;
+	t_strcut		*curstr;
 
 	curstr = liststr;
 	headcmd = createnew_lstcmd();
@@ -101,7 +101,7 @@ static t_listcmd	*fusion_and_sepcmd(t_strcut *liststr)
 t_listcmd	*str_split(char *str, t_data *data)
 {
 	t_strcut	*liststr;
-	t_listcmd		*listcmd;
+	t_listcmd	*listcmd;
 
 	liststr = qsp_split(str);
 	if (!liststr)

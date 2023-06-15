@@ -6,7 +6,7 @@
 /*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 08:36:36 by kkaiyawo          #+#    #+#             */
-/*   Updated: 2023/06/08 13:40:30 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/15 09:53:24 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,8 @@ int	fs_check(t_list *fslst, int *fd, t_parser *ps)
 		else if (fs->type == HEREDOC)
 			status = heredoc_open(fs, ps);
 		if (status != 0)
-			return (status); // error
+			executor_error(ps, "heredoc", OPEN_ERROR, 1);
 		*fd = fs->fd;
-		print_debug(6, "opening: ", fs->name, ", type: ", ft_itoa(fs->type), " at fd", ft_itoa(fs->fd));
 		if (ptr->next != NULL && fs->fd > 2)
 			file_close(&fs->fd);
 		ptr = ptr->next;

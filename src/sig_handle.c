@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sig_handle.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
+/*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 11:52:46 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/15 08:50:11 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/06/15 09:57:53 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,3 @@ void	signal_handling(void)
 	sigaction(SIGQUIT, &sig_quit, NULL);
 	signal_int_handling(1);
 }
-

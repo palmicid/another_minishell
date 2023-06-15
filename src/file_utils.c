@@ -6,18 +6,19 @@
 /*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 11:50:14 by kkaiyawo          #+#    #+#             */
-/*   Updated: 2023/06/15 09:32:15 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/15 09:52:07 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "backend.h"
 
+//errno->1
 int	file_open(t_fileset *fs, t_parser *ps)
 {
 	if (access(fs->name, F_OK) != 0)
 	{
 		if (fs->type == INFILE)
-			executor_error(ps, fs->name, FILE_ERROR, errno); //1
+			executor_error(ps, fs->name, FILE_ERROR, errno);
 		else if (fs->type == OUTFILE || fs->type == APPEND)
 			fs->fd = open(fs->name, O_CREAT | O_WRONLY, 0644);
 		file_close(&fs->fd);
@@ -25,24 +26,17 @@ int	file_open(t_fileset *fs, t_parser *ps)
 	if (fs->type == INFILE)
 	{
 		if (access(fs->name, R_OK) != 0)
-			executor_error(ps, fs->name, ACCESS_ERROR, errno); //1
+			executor_error(ps, fs->name, ACCESS_ERROR, errno);
 		fs->fd = open(fs->name, O_RDONLY);
-			print_debug(4, "opened ", fs->name, " (read) at fd ", ft_itoa(fs->fd));
 	}
 	else if (fs->type == OUTFILE || fs->type == APPEND)
 	{
 		if (access(fs->name, W_OK) != 0)
-			executor_error(ps, fs->name, ACCESS_ERROR, errno); //1
+			executor_error(ps, fs->name, ACCESS_ERROR, errno);
 		if (fs->type == APPEND)
-		{
 			fs->fd = open(fs->name, O_WRONLY | O_APPEND);
-			print_debug(4, "opened ", fs->name, " (append) at fd ", ft_itoa(fs->fd));
-		}
 		else if (fs->type == OUTFILE)
-		{
 			fs->fd = open(fs->name, O_WRONLY | O_TRUNC);
-			print_debug(4, "opened ", fs->name, " (trunc) at fd ", ft_itoa(fs->fd));
-		}
 	}
 	return (0);
 }

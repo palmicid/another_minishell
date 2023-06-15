@@ -6,7 +6,7 @@
 /*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 08:39:51 by kkaiyawo          #+#    #+#             */
-/*   Updated: 2023/06/08 08:24:13 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/15 09:48:53 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	**ft_arrclear(char **arr)
 				free(arr[i]);
 			i++;
 		}
-	free(arr);
+		free(arr);
 	}
 	return (NULL);
 }

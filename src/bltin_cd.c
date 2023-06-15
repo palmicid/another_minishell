@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bltin_cd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
+/*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 22:19:23 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/14 14:59:14 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/06/15 09:49:48 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,20 @@
 
 static void	set_newpwdenv(int oldpwd, int pwd)
 {
-	char *curdir;
+	char	*curdir;
 
 	curdir = getcwd(NULL, 0);
-	if ((oldpwd != -1) && (pwd == -1)) // oldpwd OK pwd -1
+	if ((oldpwd != -1) && (pwd == -1))
 	{
 		free(environ[oldpwd]);
 		environ[oldpwd] = ft_strjoin("OLDPWD=", "");
 	}
-	else if ((oldpwd == -1) && (pwd != -1)) // oldpwd -1 pwd OK
+	else if ((oldpwd == -1) && (pwd != -1))
 	{
 		free(environ[pwd]);
 		environ[oldpwd] = ft_strjoin("PWD=", "");
 	}
-	else if ((oldpwd != -1) && (pwd != -1)) // both OK
+	else if ((oldpwd != -1) && (pwd != -1))
 	{
 		free(environ[oldpwd]);
 		environ[oldpwd] = ft_strjoin("OLD", environ[pwd]);

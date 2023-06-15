@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bltin_echo.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
+/*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 22:19:34 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/14 17:29:54 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/06/15 09:50:07 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	print_echo(char **strarr, int st)
 {
 	int	count;
-	
+
 	count = count_element_p2p(strarr);
 	if (strarr[st])
 		ft_putstr_fd(strarr[st], 1);

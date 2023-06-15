@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
+/*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 23:18:15 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/15 09:14:51 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/06/15 09:53:54 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,7 +190,7 @@ t_listcmd	*free_cmdlist(t_listcmd *lstcmd);
 // utils_5
 t_strcut	*inside_cxmetavalid(t_strcut **head, char *str);
 t_strcut	*createnew_strcut(void);
-t_listcmd		*createnew_lstcmd(void);
+t_listcmd	*createnew_lstcmd(void);
 t_c			*create_countptr(void);
 // err_msg
 void		err_redirpipe(char *str);
@@ -213,8 +213,8 @@ char		**ps_getpath(char **envp);
 /* ****************************************************************************
 free t_exec struct
 **************************************************************************** */
-void	*ps_free(void *ps);
-void	ps_free2(void *ps);
+void		*ps_free(void *ps);
+void		ps_free2(void *ps);
 
 // exec_utils.c
 /* ****************************************************************************

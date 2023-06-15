@@ -6,7 +6,7 @@
 /*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 02:18:56 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/15 09:40:03 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/15 09:53:41 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,17 +66,14 @@ static void	exit_end(t_data *data, char **strcmd)
 // the child going to be parent for all program
 int	process(char *strcmd, t_data *data)
 {
-	int		stat;
+	int			stat;
 	t_listcmd	*cmdlist;
 
 	cmdlist = NULL;
 	add_history(strcmd);
 	cmdlist = str_split(strcmd, data);
-	// to execute
 	print_debug(1, cmdlist);
-	// if (cmdlist->next != NULL && ft_strchr(cmdlist->next->cmd, '|') != NULL)
 	stat = soloexecve(cmdlist, data);
-	// data->exit_stat = to_execute(cmdlist);
 	cmdlist = free_cmdlist(cmdlist);
 	return (stat);
 }
@@ -102,12 +99,9 @@ int	main(void)
 		else if (ft_strlen(strcmd) > 0)
 			x = process(strcmd, &data);
 		if (x == 1)
-		{
 			exit_end(&data, &strcmd);
-		}
 		free(strcmd);
 	}
 	ft_putendl_fd("exit", 1);
 	exit(end_environ(&data));
 }
-

@@ -1,0 +1,105 @@
+lib/libft/ft_atoi.c: OK!
+lib/libft/ft_atol.c: OK!
+lib/libft/ft_bzero.c: OK!
+lib/libft/ft_calloc.c: OK!
+lib/libft/ft_free_p2p.c: OK!
+lib/libft/ft_isalnum.c: OK!
+lib/libft/ft_isalpha.c: OK!
+lib/libft/ft_isascii.c: OK!
+lib/libft/ft_isdigit.c: OK!
+lib/libft/ft_isprint.c: OK!
+lib/libft/ft_itoa.c: OK!
+lib/libft/ft_lstadd_back.c: OK!
+lib/libft/ft_lstadd_front.c: OK!
+lib/libft/ft_lstclear.c: OK!
+lib/libft/ft_lstdelone.c: OK!
+lib/libft/ft_lstiter.c: OK!
+lib/libft/ft_lstlast.c: OK!
+lib/libft/ft_lstmap.c: OK!
+lib/libft/ft_lstnew.c: OK!
+lib/libft/ft_lstsize.c: OK!
+lib/libft/ft_memchr.c: OK!
+lib/libft/ft_memcmp.c: OK!
+lib/libft/ft_memcpy.c: OK!
+lib/libft/ft_memmove.c: OK!
+lib/libft/ft_memset.c: OK!
+lib/libft/ft_putchar_fd.c: OK!
+lib/libft/ft_putendl_fd.c: OK!
+lib/libft/ft_putnbr_fd.c: OK!
+lib/libft/ft_putstr_fd.c: OK!
+lib/libft/ft_split.c: OK!
+lib/libft/ft_splitdup.c: OK!
+lib/libft/ft_strchr.c: OK!
+lib/libft/ft_strdup.c: OK!
+lib/libft/ft_striteri.c: OK!
+lib/libft/ft_strjoin.c: OK!
+lib/libft/ft_strlcat.c: OK!
+lib/libft/ft_strlcpy.c: OK!
+lib/libft/ft_strlen.c: OK!
+lib/libft/ft_strmapi.c: OK!
+lib/libft/ft_strncmp.c: OK!
+lib/libft/ft_strnstr.c: OK!
+lib/libft/ft_strrchr.c: OK!
+lib/libft/ft_strtrim.c: OK!
+lib/libft/ft_substr.c: OK!
+lib/libft/ft_tolower.c: OK!
+lib/libft/ft_toupper.c: OK!
+lib/libft/get_next_line.c: OK!
+lib/libft/get_next_line.h: OK!
+lib/libft/get_next_line_utils.c: OK!
+lib/libft/libft.h: OK!
+lib/libft/ssp_strjoin.c: OK!
+src/arr_utils.c: OK!
+src/backend.h: OK!
+src/bltin.h: OK!
+src/bltin_cd.c: OK!
+src/bltin_echo.c: OK!
+src/bltin_env.c: OK!
+src/bltin_errmsg.c: OK!
+src/bltin_exit.c: Error!
+Error: SPC_BEFORE_NL        (line:  79, col:  27):	Space before newline
+Error: SPACE_EMPTY_LINE     (line:  86, col:   1):	Space on empty line
+src/bltin_export.c: OK!
+src/bltin_pwd.c: OK!
+src/bltin_unset.c: OK!
+src/bltin_utils_1.c: OK!
+src/debugger.c: OK!
+src/env.c: OK!
+src/err_msg.c: OK!
+src/exec_utils.c: OK!
+src/executor.c: Error!
+Error: WRONG_SCOPE_COMMENT  (line:  22, col:  26):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  22, col:  26):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  25, col:  26):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  25, col:  26):	Comment is invalid in this scope
+Error: TAB_INSTEAD_SPC      (line:  41, col:  32):	Found tab when expecting space
+Error: WRONG_SCOPE_COMMENT  (line:  41, col:  37):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  41, col:  37):	Comment is invalid in this scope
+src/executor_utils.c: OK!
+src/file_utils.c: OK!
+src/fs_utils.c: OK!
+src/malloc_utils.c: OK!
+src/minishell.c: Error!
+Error: WRONG_SCOPE_COMMENT  (line:  34, col:   9):	Comment is invalid in this scope
+src/minishell.h: OK!
+src/parser.c: OK!
+src/parser_1.c: OK!
+src/parser_2.c: OK!
+src/parser_3.c: OK!
+src/parser_4.c: OK!
+src/parser_5.c: OK!
+src/parser_6.c: OK!
+src/ps_utils.c: OK!
+src/pseudopipex.c: OK!
+src/pseudopipex_cmd.c: OK!
+src/sig_handle.c: Error!
+Error: EMPTY_LINE_EOF       (line:  58, col:   1):	Empty line at end of file
+src/utils_1.c: Error!
+Error: TOO_MANY_FUNCS       (line:  81, col:   1):	Too many functions in file
+Error: DECL_ASSIGN_LINE     (line:  83, col:  22):	Declaration and assignation on a single line
+Error: MISALIGNED_VAR_DECL  (line:  84, col:  13):	Misaligned variable declaration
+Error: DECL_ASSIGN_LINE     (line:  84, col:  16):	Declaration and assignation on a single line
+src/utils_2.c: OK!
+src/utils_3.c: OK!
+src/utils_4.c: OK!
+src/utils_5.c: OK!
