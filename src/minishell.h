@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 23:18:15 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/14 13:31:33 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/15 09:14:51 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 # include <sys/errno.h>
 # include "bltin.h"
 
-# define DEBUG 1
+# define DEBUG 0
 
 typedef struct s_data
 {
@@ -129,6 +129,8 @@ void		soloexit(t_listcmd *cmdlist, t_data *data);
 // sig_handle
 void		sig_int_handler(int sig);
 void		signal_handling(void);
+void		sig_int_handler_noredis(int sig);
+void		signal_int_handling(int mode);
 
 // env
 int			init_environ(t_data *data);
