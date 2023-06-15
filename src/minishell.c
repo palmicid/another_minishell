@@ -6,7 +6,7 @@
 /*   By: kkaiyawo <kkaiyawo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 02:18:56 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/15 09:53:41 by kkaiyawo         ###   ########.fr       */
+/*   Updated: 2023/06/15 11:26:37 by kkaiyawo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,18 @@ int	soloexecve(t_listcmd *cmdlist, t_data *data)
 	if (cmdlist->next == NULL)
 	{
 		if (ft_strncmp(cmdlist->cmd[0], "exit", 5) == 0)
-			data->exit_stat = mini_exit(cmdlist->cmd) % 255;
+			data->exit_stat = mini_exit(cmdlist->cmd);
 		else if (ft_strncmp(cmdlist->cmd[0], "export", 7) == 0)
-			data->exit_stat = mini_export(cmdlist->cmd) % 255;
+			data->exit_stat = mini_export(cmdlist->cmd) % 256;
 		else if (ft_strncmp(cmdlist->cmd[0], "unset", 6) == 0)
-			data->exit_stat = mini_unset(cmdlist->cmd) % 255;
+			data->exit_stat = mini_unset(cmdlist->cmd) % 256;
 		else if (ft_strncmp(cmdlist->cmd[0], "cd", 3) == 0)
-			data->exit_stat = mini_cd(cmdlist->cmd) % 255;
+			data->exit_stat = mini_cd(cmdlist->cmd) % 256;
 		else
-			data->exit_stat = executor(cmdlist, environ) % 255;
+			data->exit_stat = executor(cmdlist, environ) % 256;
 	}
 	else
-		data->exit_stat = executor(cmdlist, environ) % 255;
+		data->exit_stat = executor(cmdlist, environ) % 256;
 	if (cmdlist->next == NULL && ft_strncmp(cmdlist->cmd[0], "exit", 5) == 0)
 	{
 		//ft_putendl_fd(cmdlist->cmd[0], 1);
