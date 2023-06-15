@@ -6,7 +6,7 @@
 /*   By: pruangde <pruangde@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 22:20:13 by pruangde          #+#    #+#             */
-/*   Updated: 2023/06/15 10:43:23 by pruangde         ###   ########.fr       */
+/*   Updated: 2023/06/15 10:47:55 by pruangde         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static int	convert_code(char *str, long *code)
 
 int	mini_exit(char **strarr)
 {
-	int	code;
+	long	code;
 	
 	if (!strarr[1])
 		return (EXIT_SUCCESS);
@@ -89,7 +89,7 @@ int	mini_exit(char **strarr)
 		return (exit_with_err(strarr[1]));
 	if (cx_19aft(strarr[1]))
 		return (exit_with_err(strarr[1]));
-	if (convert_code(strarr[1], &code) < 0)
+	if (convert_code(strarr[1], &code))
 		return (exit_with_err(strarr[1]));
-	return (code);
+	return ((int)code);
 }
